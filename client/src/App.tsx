@@ -1,10 +1,12 @@
 import React from 'react';
 import './App.css';
+import GameMenu from './components/GameMenu';
 
 function App() {
   return (
     <div className="App">
-      <p>This is the client</p>
+      <h1>Typing Game</h1>
+      <GameMenu/>
     </div>
   );
 }
