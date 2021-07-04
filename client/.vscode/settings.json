@@ -1,5 +1,3 @@
 {
-    "typescript.tsdk": "node_modules/typescript/lib",
-    "eslint.validate": [ "javascript", "javascriptreact", "html", "typescriptreact" ],
-    "eslint.workingDirectories": ["./src"],
+    "typescript.tsdk": "node_modules/typescript/lib"
 }
