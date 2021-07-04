@@ -21,21 +21,11 @@
         "@typescript-eslint"
     ],
     "rules": {
-        "indent": [
-            "error",
-            "tab"
-        ],
-        "linebreak-style": [
-            "error",
-            "unix"
-        ],
-        "quotes": [
-            "error",
-            "single"
-        ],
-        "semi": [
-            "error",
-            "always"
-        ]
+        "indent": ["warn","tabs"],
+        "linebreak-style": ["warn","unix"],
+        "quotes": ["warn","single"],
+        "semi": ["warn","always"],
+        "array-bracket-spacing": ["warn","always"],
+        "object-curly-spacing": ["warn","always"]
     }
 }
