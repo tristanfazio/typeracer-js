@@ -1,6 +1,38 @@
-.game {
-    border: 2px grey;
-    border-radius: 25px;
-    width: 25px;
-    height: 25px;
+.buttonContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.createGameButton {
+    background-color: #4281A4;
+    margin-right: 8px;
+}
+
+.joinGameButton {
+    background-color: #0A8754;
+    margin-left: 8px;
+}
+
+.button {
+    border-radius: 16px;
+    border: solid 2px #282A36;
+    color: white;
+    cursor: pointer;
+    font-size: large;
+    padding: 16px;
+    width: 100%;
+    margin-top: 16px;
+}
+
+.gamesContainer{
+    display:flex;
+    flex-direction: column;
+}
+
+.gameList {
+    border: solid 2px rgb(170, 168, 168);
+    border-radius: 16px;
+    width: 500px;
+    height: 500px;
 }

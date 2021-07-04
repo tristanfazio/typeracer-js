@@ -1,13 +1,25 @@
 import React from 'react';
 import './App.css';
 import GameMenu from './components/GameMenu';
+import { Router, Route, Switch } from 'react-router-dom'
+import history from './utils/history';
+import CreateGame from './components/CreateGame';
+import Header from './components/Header';
 
 function App() {
   return (
+    <div>
+    <Header/>
     <div className="App">
-      <h1>Typing Game</h1>
-      <GameMenu/>
+      <Router history={history}>
+        <Switch>
+          <Route exact path="/" component = {GameMenu}/>
+          <Route exact path="/game/create" component = {CreateGame}/>
+        </Switch>
+      </Router>
     </div>
+    </div>
+    
   );
 }
 
