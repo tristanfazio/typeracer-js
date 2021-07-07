@@ -14,6 +14,15 @@
     margin-left: 8px;
 }
 
+.createGameButton:hover {
+    background-color: #376e8b;
+}
+
+.joinGameButton:hover {
+    background-color: #086e45;
+}
+
+
 .button {
     border-radius: 16px;
     border: solid 2px #282A36;

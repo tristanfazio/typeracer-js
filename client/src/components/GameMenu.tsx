@@ -13,7 +13,7 @@ const GameMenu = () => {
                     ${styles.createGameButton}`}>
                         Create Game
                 </button>
-                <button type="button" className = {`
+                <button type="button" onClick = {()=> history.push('/game/join')} className = {`
                     ${styles.joinGameButton} 
                     ${styles.button}`}>
                         Join Game
