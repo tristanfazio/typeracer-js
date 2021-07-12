@@ -1,26 +1,28 @@
 import { Server, Socket } from "socket.io";
-import { Request, Response } from 'express';
+import { createServer } from "http";
+import { LobbyManager } from "./game/LobbyManager";
 
-const app = require("express")();
 const port = 3000;
+const hostname = 'localhost'
 
-const httpServer = app.listen(port, () => {
-  console.log(`Server starting on http://localhost:${port}`)
+const httpServer = createServer();
+httpServer.listen(port, hostname, () => {
+  console.log(`Server running at http://${hostname}:${port}/`);
 });
 
-const io = require("socket.io")(httpServer, {
+const io = new Server(httpServer, {
   cors: {
-    origin: "http://localhost:8080",
+    origin: `http://${hostname}:8080`,
     methods: ["GET", "POST"],
     credentials: true
   }
 });
 
-app.get('/', (req: Request, res: Response) => {
-  res.send('This is the server with websockets!')
-});
+const registerGameHandlers = require("./handlers/gameHandler");
+const initLobbyManager = LobbyManager.getInstance();
 
-io.on('connection', (socket: Socket) => {
-  console.log('Client connected');
-  socket.emit('test','this is a message from the server');
-});
+const onConnection = (socket: Socket) => {
+  registerGameHandlers(io, socket);
+}
+
+io.on('connection', onConnection);
