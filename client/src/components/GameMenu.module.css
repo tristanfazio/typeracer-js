@@ -1,17 +1,21 @@
 .buttonContainer {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    margin-top: 16px;
 }
 
 .createGameButton {
     background-color: #4281A4;
     margin-right: 8px;
+    padding: 16px;
+    border: solid 2px #282A36;
 }
 
 .joinGameButton {
     background-color: #0A8754;
-    margin-left: 8px;
+    flex-grow: 0.5;
+    padding: 8px;
+    border: solid 2px #0A8754;
 }
 
 .createGameButton:hover {
@@ -22,16 +26,11 @@
     background-color: #086e45;
 }
 
-
 .button {
     border-radius: 16px;
-    border: solid 2px #282A36;
-    color: white;
+    color: whitesmoke;
     cursor: pointer;
-    font-size: large;
-    padding: 16px;
     width: 100%;
-    margin-top: 16px;
 }
 
 .gamesContainer{
@@ -39,9 +38,24 @@
     flex-direction: column;
 }
 
-.gameList {
-    border: solid 2px rgb(170, 168, 168);
+.gameListModal {
+    border: solid 2px #3D4052;
+    background-color: #3D4052;
     border-radius: 16px;
     width: 500px;
     height: 500px;
+}
+
+.gameListRow {
+    display: flex;
+    flex-direction: row;
+    color: whitesmoke;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 16px;
+    border-bottom: solid 1px #282A36;
+}
+
+ul {
+    padding: 16px;
 }
