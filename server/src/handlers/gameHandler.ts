@@ -13,11 +13,9 @@ module.exports = (io: Server, socket: Socket) => {
     
     const createGame = (payload: CreateGamePayload) => {
         const playerNickName = payload.nickName;    
-        console.log(payload);
         const player = new Player(socket.id, playerNickName, true);
         const game = new Game(player, true);
         lobbyManager.addGame(game.gameName, game.gameId);
-        socket.broadcast.emit('update-lobby', lobbyManager.gameList);
     }
 
     socket.on("request-lobby-list", requestLobbyList);

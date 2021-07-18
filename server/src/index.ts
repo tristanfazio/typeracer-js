@@ -20,6 +20,7 @@ const io = new Server(httpServer, {
 
 const registerGameHandlers = require("./handlers/gameHandler");
 const initLobbyManager = LobbyManager.getInstance();
+initLobbyManager.attachServer(io);
 
 const onConnection = (socket: Socket) => {
   registerGameHandlers(io, socket);
