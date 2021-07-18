@@ -11,11 +11,22 @@ module.exports = (io: Server, socket: Socket) => {
         socket.emit('update-lobby', lobbyManager.gameList);
     } 
     
-    const createGame = (payload: CreateGamePayload) => {
-        const playerNickName = payload.nickName;    
-        const player = new Player(socket.id, playerNickName, true);
-        const game = new Game(player, true);
-        lobbyManager.addGame(game.gameName, game.gameId);
+    const createGame = async (payload: CreateGamePayload) => {
+        console.log(`creating game for:${payload.nickName}`)
+        try {
+            const playerNickName = payload.nickName;    
+            const player = new Player(socket.id, playerNickName, true);
+            const game = new Game(player, true);
+            lobbyManager.addGame(game.gameName, game.gameId);
+
+            const gameId = game.gameId;
+            socket.join(gameId);
+            io.to(gameId).emit('update-game', game);
+
+            console.log(game);
+        } catch(error) {
+            console.log(error);
+        }
     }
 
     socket.on("request-lobby-list", requestLobbyList);
