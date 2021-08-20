@@ -4,6 +4,7 @@ import { Router, Route, Switch } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import history from './utils/history';
 import CreateGame from './components/CreateGame';
+import JoinGame from './components/JoinGame';
 import Header from './components/Header';
 import { Player } from './utils/types';
 import socket from './socketConfig';
@@ -42,6 +43,7 @@ function App() {
           <Switch>
             <Route exact path="/" component = {GameMenu}/>
             <Route path="/game/create" component = {CreateGame}/>
+            <Route path="/game/join" component = {JoinGame}/>
           </Switch>
         </Router>
       </div>

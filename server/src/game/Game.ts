@@ -15,6 +15,10 @@ class Game {
         this.isOpen = isOpen;
         this.players.push(player);
     }
+
+    addPlayer(player:Player) {
+        this.players.push(player);
+    }
 }
 
 export default Game;

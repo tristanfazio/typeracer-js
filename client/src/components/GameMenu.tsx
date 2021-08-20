@@ -59,8 +59,11 @@ const GameListRow = (props: GameRowProps) => {
 
     return (
         <div className = {styles.gameListRow}>
-            <p>{props.gameName}</p>   <JoinButton onClick = {() => history.push(`/game/${props.gameId}`)
-}/>
+            <p>{props.gameName}</p>   <JoinButton onClick = {() => history.push({
+                pathname:`/game/join`,
+                state: {gameId: props.gameId}
+                })
+            }/>
         </div>
     );
 };
