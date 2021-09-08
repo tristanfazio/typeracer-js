@@ -4,10 +4,11 @@ import Player from "../game/Player";
 import { CreateGamePayload } from "../messages/CreateGamePayload";
 import { JoinGamePayload } from "../messages/JoinGamePayload";
 import { LobbyManager } from "../game/LobbyManager";
+import { GameManager } from "../game/GameManager";
 
 module.exports = (io: Server, socket: Socket) => {
     const lobbyManager = LobbyManager.getInstance();
-    const games = new Map<string, Game>();
+    const gameManager = GameManager.getInstance();
 
     const requestLobbyList = () => {
         socket.emit('update-lobby', lobbyManager.gameList);
@@ -22,7 +23,7 @@ module.exports = (io: Server, socket: Socket) => {
             const gameId = game.gameId;
             
             lobbyManager.addGame(game.gameName, gameId);
-            games.set(gameId, game);
+            gameManager.addGame(game);
 
             socket.join(gameId);
             io.to(gameId).emit('update-game', game);
@@ -40,9 +41,7 @@ module.exports = (io: Server, socket: Socket) => {
             const player = new Player(socket.id, playerNickName, true);
             const gameId = payload.gameId;
 
-            const game = games.get(gameId);
-
-            console.log(game);
+            const game = gameManager.getGame(gameId);
 
             game?.addPlayer(player);
 

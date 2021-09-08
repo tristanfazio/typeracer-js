@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import history from './utils/history';
 import CreateGame from './components/CreateGame';
 import JoinGame from './components/JoinGame';
+import Game from './components/Game';
 import Header from './components/Header';
 import { Player } from './utils/types';
 import socket from './socketConfig';
@@ -30,20 +31,24 @@ function App() {
 
   useEffect(()=> {
       if(gameState.gameId !== '') {
-          history.push(`/game/${gameState.gameId}`)
+          history.push({
+            pathname:`/game/${gameState.gameId}`,
+            state: gameState
+          })
       }
   },[gameState.gameId]);
 
 
   return (
     <div>
-      <Header/>
+      {/* <Header/> */}
       <div className="App">
         <Router history={history}>
           <Switch>
             <Route exact path="/" component = {GameMenu}/>
-            <Route path="/game/create" component = {CreateGame}/>
-            <Route path="/game/join" component = {JoinGame}/>
+            <Route path="/game/create" exact component = {CreateGame}/>
+            <Route path="/game/join" exact component = {JoinGame}/>
+            <Route path="/game/:gameId" exact component = {Game}/>
           </Switch>
         </Router>
       </div>
