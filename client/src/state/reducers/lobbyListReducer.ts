@@ -1,5 +1,5 @@
-const reducer = (state = {}, action) => {
+const lobbyListReducer = (state = {}, action: ) => {
 
 }
 
-export default reducer;
+export default lobbyListReducer;
