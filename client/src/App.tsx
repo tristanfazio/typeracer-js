@@ -7,7 +7,7 @@ import CreateGame from './components/CreateGame';
 import JoinGame from './components/JoinGame';
 import Game from './components/Game';
 import Header from './components/Header';
-import { Player } from './utils/types';
+import { Player } from './types';
 import socket from './socketConfig';
 
 interface GameState {
@@ -16,7 +16,6 @@ interface GameState {
 }
 
 function App() {
-
   const[gameState, setGameState] = useState<GameState>({gameId: '', players: []});
 
   useEffect(() => {
@@ -37,7 +36,6 @@ function App() {
           })
       }
   },[gameState.gameId]);
-
 
   return (
     <div>

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Player } from "../utils/types";
+import { Player } from "../types";
 
 interface GameState {
     gameId: string,
