@@ -1,4 +1,6 @@
-const lobbyListReducer = (state = {}, action: ) => {
+import { UPDATE_LOBBY_LIST } from  '../actions';
+
+const lobbyListReducer = (state = {}, action) => {
 
 }
 
