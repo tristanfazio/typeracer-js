@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import lobbyListReducer from './lobbyListReducer';
+import lobbyListReducer from './lobbyList/lobbyListReducer';
 
 const reducers = combineReducers({
     lobbyList: lobbyListReducer

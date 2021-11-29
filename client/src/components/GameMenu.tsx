@@ -1,8 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useReducer } from 'react';
 import styles from './GameMenu.module.css'
 import { useHistory } from "react-router-dom";
 import { GameListEntry } from '../types';
-import socket from '../socketConfig';
+import socket from '../sockets/socketConfig';
+import lobbyListReducer, { initialState } from '../state/lobbyList/lobbyListReducer';
+import { registerUpdateLobbyListener } from '../sockets/lobbyListSockets';
 
 interface LobbyState {
   gameList: GameListEntry[];
@@ -18,19 +20,14 @@ interface GameRowProps {
 }
 
 const GameMenu = () => {
-    const[lobbyState, setLobbyState] = useState<LobbyState>({ gameList: [] });
+    const [lobbyState] = useReducer(lobbyListReducer, initialState);
 
     let history = useHistory();
 
     useEffect(() => {
+        registerUpdateLobbyListener();
         socket.emit('request-lobby-list');
     }, [])
-    
-    useEffect(() => {
-        socket.on('update-lobby', (payload: GameListEntry[]) => {
-            setLobbyState({ gameList:payload });
-        })
-    });
 
     return (
         <div className = {styles.gamesContainer}>
@@ -43,6 +40,7 @@ const GameMenu = () => {
 }
 
 const GameListModal = (props: LobbyState) => {
+    props.gameList.forEach(element => console.log(element.gameName));
     return (
         <div className = {styles.gameListModal}>
             <ul>

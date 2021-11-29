@@ -1,5 +1,5 @@
 import { SyntheticEvent, useState } from "react";
-import socket from "../socketConfig";
+import socket from "../sockets/socketConfig";
 import styles from './JoinGame.module.css'
 import { useLocation } from 'react-router-dom';
 

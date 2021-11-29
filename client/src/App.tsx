@@ -8,7 +8,7 @@ import JoinGame from './components/JoinGame';
 import Game from './components/Game';
 import Header from './components/Header';
 import { Player } from './types';
-import socket from './socketConfig';
+import socket from './sockets/socketConfig';
 
 interface GameState {
   gameId: string,

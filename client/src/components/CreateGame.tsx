@@ -1,5 +1,5 @@
 import React, { SyntheticEvent, useState } from "react";
-import socket from "../socketConfig";
+import socket from "../sockets/socketConfig";
 import styles from './CreateGame.module.css'
 
 const CreateGame = () => {

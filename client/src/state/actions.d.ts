@@ -1,1 +1,0 @@
-export type UPDATE_LOBBY_LIST = "UPDATE_LOBBY_LIST"
