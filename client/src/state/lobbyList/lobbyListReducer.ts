@@ -10,14 +10,13 @@ export const initialState: LobbyState = {
 	gameList: [] 
 }
 
-function lobbyListReducer(state: LobbyState, action: LobbyAction): LobbyState {
-	var newState:LobbyState = {gameList: []}
+const lobbyListReducer = (state = initialState, action: LobbyAction): LobbyState => {
 	switch(action.type) {
 		case UPDATE_LOBBY_LIST:
-			newState = { ...state, gameList: action.gameList };
-			break;
+			return { ...state, gameList: action.gameList };
+		default:
+			return initialState
 	}
-	return newState;
 }
 
 export default lobbyListReducer;

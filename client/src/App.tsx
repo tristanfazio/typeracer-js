@@ -9,6 +9,8 @@ import Game from './components/Game';
 import Header from './components/Header';
 import { Player } from './types';
 import socket from './sockets/socketConfig';
+import { Provider } from 'react-redux';
+import { store } from './state/store';
 
 interface GameState {
   gameId: string,
@@ -40,16 +42,18 @@ function App() {
   return (
     <div>
       {/* <Header/> */}
-      <div className="App">
-        <Router history={history}>
-          <Switch>
-            <Route exact path="/" component = {GameMenu}/>
-            <Route path="/game/create" exact component = {CreateGame}/>
-            <Route path="/game/join" exact component = {JoinGame}/>
-            <Route path="/game/:gameId" exact component = {Game}/>
-          </Switch>
-        </Router>
-      </div>
+      <Provider store={ store } >
+        <div className="App">
+          <Router history={history}>
+            <Switch>
+              <Route exact path="/" component = {GameMenu}/>
+              <Route path="/game/create" exact component = {CreateGame}/>
+              <Route path="/game/join" exact component = {JoinGame}/>
+              <Route path="/game/:gameId" exact component = {Game}/>
+            </Switch>
+          </Router>
+        </div>
+      </Provider>
     </div>
   );
 }

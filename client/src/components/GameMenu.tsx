@@ -5,11 +5,7 @@ import { GameListEntry } from '../types';
 import socket from '../sockets/socketConfig';
 import lobbyListReducer, { initialState } from '../state/lobbyList/lobbyListReducer';
 import { registerUpdateLobbyListener } from '../sockets/lobbyListSockets';
-
-interface LobbyState {
-  gameList: GameListEntry[];
-}
-
+import { useLobbyListSelector } from '../state/hooks';
 interface ButtonProps {
     onClick: () => void;
 }
@@ -20,8 +16,8 @@ interface GameRowProps {
 }
 
 const GameMenu = () => {
-    const [lobbyState] = useReducer(lobbyListReducer, initialState);
-
+    const lobbyState = useLobbyListSelector((state) => state.lobbyList.gameList);
+    
     let history = useHistory();
 
     useEffect(() => {
@@ -31,7 +27,7 @@ const GameMenu = () => {
 
     return (
         <div className = {styles.gamesContainer}>
-            <GameListModal {...lobbyState}/>
+            <GameListModal gameList = { lobbyState }/>
             <div className = {styles.buttonContainer}>
                 <CreateButton onClick = {() => history.push('/game/create')}/>
             </div>
@@ -39,14 +35,13 @@ const GameMenu = () => {
     );
 }
 
-const GameListModal = (props: LobbyState) => {
-    props.gameList.forEach(element => console.log(element.gameName));
+const GameListModal = (props: {gameList: GameListEntry[]}) => {
     return (
         <div className = {styles.gameListModal}>
             <ul>
-                {props.gameList.map((element: GameListEntry) => {
+                { props.gameList.map((element: GameListEntry) => {
                     return <GameListRow {...element} />
-                })}
+                }) } 
             </ul>
         </div>
     );
