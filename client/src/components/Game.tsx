@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { Player } from "../types";
+import styles from './Game.module.css'
+
 
 interface GameState {
     gameId: string,
@@ -10,8 +12,13 @@ function Game() {
     const[gameState, setGameState] = useState<GameState>();
 
     return(
-        <div>
-            BOOP!
+        <div className = {styles.gamePage}>
+            <div className = {styles.playerContainer}>
+                player container
+            </div>
+            <div className = {styles.quoteContainer}>
+                quote container
+            </div>
         </div>
     );
 }
