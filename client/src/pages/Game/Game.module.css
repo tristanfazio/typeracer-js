@@ -1,0 +1,25 @@
+.gamePage {
+    display: grid;
+    grid-template-columns: 0.5fr 2fr 0.5fr; 
+    grid-template-rows: 1fr 1fr; 
+    gap: 33% 0px; 
+    grid-template-areas: 
+        ". . ."
+        ". player-container ."
+        ". . ."
+        ". quote-container ."
+        ". quote-container ."
+        ". . ."; 
+}
+
+.playerContainer {
+    background-color: aliceblue;
+    border-radius: 8px;
+    grid-area: player-container;
+}
+
+.quoteContainer {
+    background-color: darkgray;
+    border-radius: 8px;
+    grid-area: quote-container;
+}                             
