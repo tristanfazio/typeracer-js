@@ -1,19 +1,27 @@
-import React, { SyntheticEvent, useState } from "react";
-import socket from "../sockets/socketConfig";
-import styles from './CreateGame.module.css'
+import { SyntheticEvent, useState } from "react";
+import socket from "../../sockets/socketConfig";
+import styles from './JoinGame.module.css'
+import { useLocation } from 'react-router-dom';
 
-const CreateGame = () => {
+interface LocationState {
+    gameId: string
+ }
+
+const JoinGame = () => {
     const [nickName, setnickName] = useState("");
+    const { state } = useLocation<LocationState>();
+    console.log(state);
+    var gameId = state.gameId;
 
     const handleSubmit = (event: SyntheticEvent): void => {
         event.preventDefault();
-        socket.emit('create-game', {nickName: nickName})
+        socket.emit('join-game', {nickName: nickName, gameId: gameId})
     }
 
     return(
         <div>
             <div className = {styles.createModal}>
-                <h2>Create Game</h2>
+                <h2>Join Game</h2>
                 <form className={styles.createForm} onSubmit={handleSubmit}>
                     <label>
                         <h3>Enter a Nickname:</h3>
@@ -24,12 +32,12 @@ const CreateGame = () => {
             <div className = {styles.buttonContainer}>
                 <button type = "button" onClick = {handleSubmit} className = {`
                     ${styles.button} 
-                    ${styles.createGameButton}`}>
-                        Create Game
+                    ${styles.joinGameButton}`}>
+                        Join Game
                 </button>
             </div>
         </div>
     );
 }
 
-export default CreateGame;
+export default JoinGame;

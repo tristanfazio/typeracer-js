@@ -1,11 +1,11 @@
 import { useEffect, useReducer } from 'react';
 import styles from './GameMenu.module.css'
 import { useHistory } from "react-router-dom";
-import { GameListEntry } from '../types';
-import socket from '../sockets/socketConfig';
-import lobbyListReducer, { initialState } from '../state/lobbyList/lobbyListReducer';
-import { registerUpdateLobbyListener } from '../sockets/lobbyListSockets';
-import { useLobbyListSelector } from '../state/hooks';
+import { GameListEntry } from '../../types';
+import socket from '../../sockets/socketConfig';
+import lobbyListReducer, { initialState } from '../../state/lobbyList/lobbyListReducer';
+import { registerUpdateLobbyListener } from '../../sockets/lobbyListSockets';
+import { useLobbyListSelector } from '../../state/hooks';
 interface ButtonProps {
     onClick: () => void;
 }

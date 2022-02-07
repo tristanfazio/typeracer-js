@@ -1,12 +1,12 @@
 import './App.css';
-import GameMenu from './components/GameMenu';
+import GameMenu from './pages/GameMenu/GameMenu';
 import { Router, Route, Switch } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import history from './utils/history';
-import CreateGame from './components/CreateGame';
-import JoinGame from './components/JoinGame';
-import Game from './components/Game';
-import Header from './components/Header';
+import CreateGame from './pages/CreateGame/CreateGame';
+import JoinGame from './pages/JoinGame/JoinGame';
+import Game from './pages/Game/Game';
+import Header from './components/Header/Header';
 import { Player } from './types';
 import socket from './sockets/socketConfig';
 import { Provider } from 'react-redux';
@@ -40,10 +40,9 @@ function App() {
   },[gameState.gameId]);
 
   return (
-    <div>
+    <div className="App">
       {/* <Header/> */}
       <Provider store={ store } >
-        <div className="App">
           <Router history={history}>
             <Switch>
               {/* <Route exact path="/" component = {GameMenu}/>
@@ -52,7 +51,6 @@ function App() {
               <Route path="/" exact component = {Game}/>
             </Switch>
           </Router>
-        </div>
       </Provider>
     </div>
   );
