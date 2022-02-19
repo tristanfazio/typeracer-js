@@ -1,0 +1,45 @@
+.playerContainer {
+    background-color: #555973;
+    border-radius: 8px;
+    grid-area: player-container;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    color: whitesmoke;
+    padding: 8px;
+}
+
+.playerElement {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.progressBarBackground {
+    height: 24px;
+    width: 100%;
+    background-color: #e0e0de;
+    border-radius: 50px;
+    margin: 8px;
+}
+
+.progressBarFiller {
+    height: 100%;
+    border-radius: inherit;
+    text-align: right;
+    min-width: 10%;
+}
+
+.progressBarLabel {
+    padding: 1px;
+    color: white;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-shadow:
+        -1px -1px 0 #686868,
+        1px -1px 0 #686868,
+        -1px 1px 0 #686868,
+        1px 1px 0 #686868;
+  }
