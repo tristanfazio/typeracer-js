@@ -1,0 +1,10 @@
+.quoteContainer {
+    background-color: #555973;
+    border-radius: 8px;
+    grid-area: quote-container;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: white;
+    font-size: x-large;
+}                             
