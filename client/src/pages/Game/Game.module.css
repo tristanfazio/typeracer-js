@@ -11,21 +11,3 @@
         ". . ."; 
     height: 100%;
 }
-
-.playerContainer {
-    background-color: aliceblue;
-    border-radius: 8px;
-    grid-area: player-container;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.quoteContainer {
-    background-color: darkgray;
-    border-radius: 8px;
-    grid-area: quote-container;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}                             
