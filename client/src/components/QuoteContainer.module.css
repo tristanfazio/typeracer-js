@@ -1,10 +1,11 @@
 .quoteContainer {
-    background-color: #555973;
+    background-color: #50546D;
     border-radius: 8px;
     grid-area: quote-container;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    color: white;
+    color: #D4D4D4;
     font-size: x-large;
+    font-weight: bold;
 }                             

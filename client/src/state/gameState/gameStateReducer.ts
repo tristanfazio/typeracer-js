@@ -1,5 +1,4 @@
-const testString = `
-You followed your conscience in the hope that others would follow theirs. 
+const testString = `You followed your conscience in the hope that others would follow theirs. 
 You didn’t do it for a reward, or a pat on the head. The universe never tells us if we did right or wrong. 
 It’s more important to try and help people, and to know that you did. 
 More important that someone else’s life gets better, then for you to feel good about yourself. 
