@@ -12,48 +12,49 @@ import socket from './sockets/socketConfig';
 import { Provider } from 'react-redux';
 import { store } from './state/store';
 
-interface GameState {
-  gameId: string,
-  players: Player[]
+interface MultiPlayerGameState {
+    gameId: string;
+    players: Player[];
 }
 
 function App() {
-  const[gameState, setGameState] = useState<GameState>({gameId: '', players: []});
-
-  useEffect(() => {
-    socket.on('update-game', (payload: GameState) => {
-        setGameState({ ...payload });
-        console.log(payload);
+    const [gameState, setGameState] = useState<MultiPlayerGameState>({
+        gameId: '',
+        players: [],
     });
-    return () => {
-      
-    }
-  },[]);
 
-  useEffect(()=> {
-      if(gameState.gameId !== '') {
-          history.push({
-            pathname:`/game/${gameState.gameId}`,
-            state: gameState
-          })
-      }
-  },[gameState.gameId]);
+    useEffect(() => {
+        socket.on('update-game', (payload: MultiPlayerGameState) => {
+            setGameState({ ...payload });
+            console.log(payload);
+        });
+        return () => {};
+    }, []);
 
-  return (
-    <div className="App">
-      {/* <Header/> */}
-      <Provider store={ store } >
-          <Router history={history}>
-            <Switch>
-              {/* <Route exact path="/" component = {GameMenu}/>
+    useEffect(() => {
+        if (gameState.gameId !== '') {
+            history.push({
+                pathname: `/game/${gameState.gameId}`,
+                state: gameState,
+            });
+        }
+    }, [gameState.gameId]);
+
+    return (
+        <div className='App'>
+            {/* <Header/> */}
+            <Provider store={store}>
+                <Router history={history}>
+                    <Switch>
+                        {/* <Route exact path="/" component = {GameMenu}/>
               <Route path="/game/create" exact component = {CreateGame}/>
               <Route path="/game/join" exact component = {JoinGame}/> */}
-              <Route path="/" exact component = {Game}/>
-            </Switch>
-          </Router>
-      </Provider>
-    </div>
-  );
+                        <Route path='/' exact component={Game} />
+                    </Switch>
+                </Router>
+            </Provider>
+        </div>
+    );
 }
 
 export default App;
