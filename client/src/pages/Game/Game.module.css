@@ -1,13 +1,10 @@
 .gamePage {
     display: grid;
-    grid-template-columns: 0.5fr 2fr 0.5fr; 
-    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
-    grid-template-areas: 
-        ". . ."
-        ". player-container ."
-        ". . ."
-        ". quote-container ."
-        ". quote-container ."
-        ". . ."; 
+    grid-template-columns: 0.5fr 2fr 0.5fr;
+    grid-template-areas:
+        '. . .'
+        '. quote-container .'
+        '. . .';
     height: 100%;
+    width: 100%;
 }

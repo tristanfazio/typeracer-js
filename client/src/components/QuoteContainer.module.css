@@ -1,11 +1,29 @@
 .quoteContainer {
-    background-color: #50546D;
+    background-color: #50546d;
     border-radius: 8px;
     grid-area: quote-container;
+
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
     justify-content: center;
-    color: #D4D4D4;
+    align-items: center;
+    /* column-gap: 4px; */
+
+    color: #d4d4d4;
     font-size: x-large;
     font-weight: bold;
-}                             
+    padding: 8px;
+}
+
+.correct {
+    color: #4AE08C;
+}
+
+.error {
+    color: #F1A9A0;
+}
+
+.cursor {
+    border-bottom: 1px solid white;
+}

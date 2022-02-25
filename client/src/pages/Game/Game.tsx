@@ -6,17 +6,18 @@ import { RootState } from '../../state/store';
 import styles from './Game.module.css';
 
 function Game() {
-    const gameState: GameState = useSelector((state: RootState) => state.gameState);
+    const gameState: GameState = useSelector(
+        (state: RootState) => state.gameState,
+    );
 
     return (
         <div className={styles.gamePage}>
             {gameState.isLoading
                 ? 'Loading...'
-                :   <div>
-                        <PlayerContainer />
-                        <QuoteContainer gameState = {gameState} />
-                    </div>  
-            }
+                : [
+                    //   <PlayerContainer />,
+                      <QuoteContainer key = 'quote-container' gameState={gameState} />,
+                  ]}
         </div>
     );
 }
