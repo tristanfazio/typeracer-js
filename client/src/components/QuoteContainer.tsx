@@ -12,7 +12,7 @@ const QuoteContainer = (props: { gameState: GameState }) => {
                     wordIndex < gameState.currentWordIndex ? styles.correct : ''
                 }
             >
-                {word.split('').map((letter, letterIndex) => {
+                {word.map((letter, letterIndex) => {
                     const key = `${wordIndex}-${letterIndex}`;
                     const cursor =
                         wordIndex == gameState.currentWordIndex &&
@@ -27,13 +27,13 @@ const QuoteContainer = (props: { gameState: GameState }) => {
 
                     const style = correct + cursor;
                     const element =
-                        letter == ' ' ? (
+                        letter.character == ' ' ? (
                             <span key={key} className={style}>
                                 &nbsp;
                             </span>
-                        ) : (
+                        ) : (  
                             <span key={key} className={style}>
-                                {letter}
+                                {letter.character}
                             </span>
                         );
                     return element;

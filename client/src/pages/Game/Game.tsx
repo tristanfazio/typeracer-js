@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import PlayerContainer from '../../components/PlayerContainer';
 import QuoteContainer from '../../components/QuoteContainer';
@@ -10,6 +11,14 @@ function Game() {
         (state: RootState) => state.gameState,
     );
 
+    useEffect(() => {
+        window.addEventListener("keydown", downHandler);
+        // Remove event listeners on cleanup
+        return () => {
+          window.removeEventListener("keydown", downHandler);
+        };
+      }, []);
+
     return (
         <div className={styles.gamePage}>
             {gameState.isLoading
@@ -20,6 +29,10 @@ function Game() {
                   ]}
         </div>
     );
+}
+
+const downHandler = (e: KeyboardEvent): void => {
+    console.log(`${e.key} + ${e.code}`);
 }
 
 export default Game;

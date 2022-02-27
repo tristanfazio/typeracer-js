@@ -7,10 +7,28 @@ Maybe one cruel thing you said haunts them forever.
 Maybe one moment of kindness gives them comfort or courage. Maybe you said the one thing they needed to hear. 
 It doesn’t matter if you ever know. You just have to try.`;
 
+
+export enum FillState {
+    DEFAULT = 'DEFAULT',
+    CORRECT = 'CORRECT',
+    CURSOR = 'CURSOR',
+    ERROR = 'ERROR',
+}
+
+export class CharElement {
+    character: string = '';
+    fillState: FillState = FillState.DEFAULT;
+    index: number = 0;
+    constructor(character: string, index: number) {
+        this.character = character;
+        this.index = index;
+    }
+}
+
 export interface GameState {
     gameId: string;
     isLoading: boolean;
-    quoteArray: string[];
+    quoteArray: CharElement[][];
     currentWordIndex: number;
     currentLetterIndex: number;
 }
@@ -31,7 +49,11 @@ const gameStateReducer = (state = initialState, action: any): GameState => {
 
 export default gameStateReducer;
 
-function parseInitialQuoteToWords(testString: string): string[] {
-    const parsedQuoteArray = testString.split(/(\s+)/);
+function parseInitialQuoteToWords(testString: string): CharElement[][] {
+    const parsedQuoteArray = testString.split(/(\s+)/).map(word => {
+        return word.split('').map((charElement,index) => {
+            return new CharElement(charElement, index)
+        })
+    });
     return parsedQuoteArray;
 }
