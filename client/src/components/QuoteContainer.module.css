@@ -24,6 +24,10 @@
     color: #F1A9A0;
 }
 
+.errorSpace {
+    border-bottom: 3px solid #F1A9A0;
+}
+
 .cursor {
-    border-bottom: 1px solid white;
+    border-bottom: 3px solid white;
 }
