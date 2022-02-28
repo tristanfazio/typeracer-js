@@ -6,9 +6,9 @@ name: Production Build
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -29,7 +29,9 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
+      - name: Change into Client directory
+        run: cd client/
       - name: Build React App Client
         run: npm install && npm run build
       - name: Deploy Client build to S3 bucket
-        run: aws s3 sync ./client/build/ s3://typeracer-clone-client --delete
+        run: aws s3 sync ./build/ s3://typeracer-clone-client --delete
