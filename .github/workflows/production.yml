@@ -30,7 +30,7 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
       - name: Change into Client directory
-        run: cd client/
+        run: cd client/ && echo $PWD && ls -l
       - name: Build React App Client
         run: npm install && npm run build
       - name: Deploy Client build to S3 bucket
