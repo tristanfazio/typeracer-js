@@ -1,9 +1,10 @@
 // import { useGameStateSelector } from "../state/hooks";
+import { GameState } from '../state/gameState/gameStateReducer';
 import styles from './PlayerContainer.module.css'
 
-function PlayerContainer() {
-    // const gameState = useGameStateSelector((state) => state);
-
+const PlayerContainer = (props: { gameState: GameState }) => {
+    const gameState = props.gameState;
+    
     return(
         <div className = {styles.playerContainer}>
             <PlayerElement playerName = "Player 1" bgColour = "#EF476F" progress = {69}/>

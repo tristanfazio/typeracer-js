@@ -39,11 +39,40 @@ function Game() {
         const currentLetterIndex = gameState.currentLetterIndex;
         const currentLetter = quoteArray[currentWordIndex][currentLetterIndex];
 
-        //check of backspace
-        //if backspace
-        //mark current letter as default
-        //decrement indexes
-        // return out before other checks
+        console.log(
+            `Current Letter: ${currentLetter.character} | Pressed Key: ${e.key}`,
+        );
+
+        //check if backspace
+        if (e.key === 'Backspace') {
+            if (currentWordIndex === 0 && currentLetterIndex === 0) return;
+            //mark current letter as default
+            gameState.quoteArray[currentWordIndex][
+                currentLetterIndex
+            ].fillState = FillState.DEFAULT;
+
+            let previousLetterIndex = currentLetterIndex;
+            let previousWordIndex = currentWordIndex;
+
+            //decrement indexes
+            if (currentLetterIndex > 0) {
+                previousLetterIndex = gameState.currentLetterIndex - 1;
+            } else {
+                previousWordIndex = gameState.currentWordIndex - 1;
+                previousLetterIndex = quoteArray[previousWordIndex].length - 1;
+            }
+
+            //update state object
+            gameState.currentLetterIndex = previousLetterIndex;
+            gameState.currentWordIndex = previousWordIndex;
+            gameState.quoteArray[previousWordIndex][
+                previousLetterIndex
+            ].fillState = FillState.CURSOR;
+
+            // send state and return out before other checks
+            dispatch(updateGameState({ ...gameState }));
+            return;
+        }
 
         //check if correct
         if (currentLetter.character === e.key.toString()) {
@@ -82,7 +111,10 @@ function Game() {
                 <p className={styles.loadingText}>Loading...</p>
             ) : (
                 [
-                    //   <PlayerContainer />,
+                    <PlayerContainer
+                        key='player-container'
+                        gameState={gameState}
+                    />,
                     <QuoteContainer
                         key='quote-container'
                         gameState={gameState}

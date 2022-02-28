@@ -12,19 +12,17 @@ import socket from './sockets/socketConfig';
 import { Provider } from 'react-redux';
 import { store } from './state/store';
 
-interface MultiPlayerGameState {
+interface GameEntryState {
     gameId: string;
-    players: Player[];
 }
 
 function App() {
-    const [gameState, setGameState] = useState<MultiPlayerGameState>({
+    const [gameState, setGameState] = useState<GameEntryState>({
         gameId: '',
-        players: [],
     });
 
     useEffect(() => {
-        socket.on('update-game', (payload: MultiPlayerGameState) => {
+        socket.on('update-game', (payload: GameEntryState) => {
             setGameState({ ...payload });
             console.log(payload);
         });
@@ -35,7 +33,6 @@ function App() {
         if (gameState.gameId !== '') {
             history.push({
                 pathname: `/game/${gameState.gameId}`,
-                state: gameState,
             });
         }
     }, [gameState.gameId]);
