@@ -35,4 +35,4 @@ jobs:
       - name: Build React App Client
         run: npm install && npm run build
       - name: Deploy Client build to S3 bucket
-        run: aws s3 sync ./build/ s3://typeracer-clone-client --delete
+        run: aws s3 sync ./build/ s3://typeracer-clone-client.fazio.dev --delete
