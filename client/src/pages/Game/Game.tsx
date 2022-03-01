@@ -56,10 +56,13 @@ function Game() {
 
             //decrement indexes
             if (currentLetterIndex > 0) {
+                //mid word, only decrement letter
                 previousLetterIndex = gameState.currentLetterIndex - 1;
             } else {
+                //travers back a word
                 previousWordIndex = gameState.currentWordIndex - 1;
                 previousLetterIndex = quoteArray[previousWordIndex].length - 1;
+                gameState.completedWordCount--;
             }
 
             //update state object
@@ -100,6 +103,12 @@ function Game() {
             gameState.currentLetterIndex = 0;
             //progress word index
             gameState.currentWordIndex++;
+            //update player progress
+            gameState.completedWordCount++;
+            gameState.playerList[0].progress = Math.trunc(
+                (gameState.completedWordCount / gameState.quoteArray.length) *
+                    100,
+            );
             dispatch(updateGameState({ ...gameState }));
             return;
         }

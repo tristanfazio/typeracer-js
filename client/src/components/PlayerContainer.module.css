@@ -4,7 +4,6 @@
     grid-area: player-container;
     box-sizing: border-box;
 
-
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -34,11 +33,12 @@
     height: 100%;
     border-radius: inherit;
     text-align: right;
-    min-width: 10%;
+    min-width: fit-content;
 }
 
 .progressBarLabel {
-    padding: 1px;
+    margin-left: 8px;
+    margin-right: 8px;
     color: white;
     font-weight: bold;
     display: flex;

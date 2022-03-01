@@ -44,8 +44,8 @@ function App() {
                 <Router history={history}>
                     <Switch>
                         {/* <Route exact path="/" component = {GameMenu}/>
-              <Route path="/game/create" exact component = {CreateGame}/>
-              <Route path="/game/join" exact component = {JoinGame}/> */}
+                         <Route path="/game/create" exact component = {CreateGame}/>
+                        <Route path="/game/join" exact component = {JoinGame}/> */}
                         <Route path='/' exact component={Game} />
                     </Switch>
                 </Router>
