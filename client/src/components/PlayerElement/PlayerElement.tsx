@@ -12,8 +12,11 @@ const PlayerElement = (props: PlayerProps) => {
 
     return (
         <div className={styles.playerElement}>
-            <div>{playerName}</div>
+            <div className = {styles.userName}>{playerName}</div>
             <ProgressBar bgColour={bgColour} progress={progress} />
+            <span className={styles.progressLabel}>
+                    {`${progress}%`}
+                </span>
         </div>
     );
 };

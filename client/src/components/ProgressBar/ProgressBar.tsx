@@ -17,7 +17,8 @@ const ProgressBar = (props: ProgressBarProps) => {
                 }}
             >
                 <span className={styles.progressBarLabel}>
-                    {`${progress}%`}
+                    {/* {`${progress}%`} */}
+                    &#128640;
                 </span>
             </div>
         </div>
