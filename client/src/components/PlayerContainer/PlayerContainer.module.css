@@ -1,0 +1,16 @@
+.playerContainer {
+    background-color: #555973;
+    border-radius: 8px;
+    grid-area: player-container;
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    color: whitesmoke;
+    margin-top: 8px;
+    padding: 8px;
+    width: 100%;
+    max-height: fit-content;
+}

@@ -30,14 +30,17 @@ function Game() {
 
     const onKeyDown = (e: KeyboardEvent): void => {
         //TODO: add header guard for isGameStarted
-        //TODO: add header gaurd for allowed key presses, eg no function keys
         if (e.location !== KeyboardEvent.DOM_KEY_LOCATION_STANDARD) return;
+        if (gameState.currentWordIndex === gameState.quoteArray.length) return;
+        
         console.log(gameState);
 
         const quoteArray = gameState.quoteArray;
         const currentWordIndex = gameState.currentWordIndex;
         const currentLetterIndex = gameState.currentLetterIndex;
         const currentLetter = quoteArray[currentWordIndex][currentLetterIndex];
+
+
 
         console.log(
             `Current Letter: ${currentLetter.character} | Pressed Key: ${e.key}`,

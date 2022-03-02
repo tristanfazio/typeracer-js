@@ -1,4 +1,4 @@
-import { FillState, GameState } from '../state/gameState/gameStateReducer';
+import { FillState, GameState } from '../../state/gameState/gameStateReducer';
 import styles from './QuoteContainer.module.css';
 
 const QuoteContainer = (props: { gameState: GameState }) => {

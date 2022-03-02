@@ -1,26 +1,3 @@
-.playerContainer {
-    background-color: #555973;
-    border-radius: 8px;
-    grid-area: player-container;
-    box-sizing: border-box;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-
-    color: whitesmoke;
-    margin: auto;
-    padding: 8px;
-    width: 100%;
-}
-
-.playerElement {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin: 8px;
-}
-
 .progressBarBackground {
     height: 24px;
     width: 100%;
