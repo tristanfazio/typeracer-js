@@ -9,8 +9,25 @@
     justify-content: center;
 
     color: whitesmoke;
-    margin-top: 8px;
+    margin: auto;
     padding: 8px;
     width: 100%;
     max-height: fit-content;
+}
+
+.statsContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+
+
+    color: white;
+    font-weight: bold;
+    text-shadow: -1px -1px 0 #686868, 1px -1px 0 #686868, -1px 1px 0 #686868,
+        1px 1px 0 #686868;
+}
+
+.statsContainer span {
+    margin-right: 16px;
 }
