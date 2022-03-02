@@ -50,5 +50,6 @@
     "jsxSingleQuote": true,
     "tabWidth": 4,
     "trailingComma": "all"
-  }
+  },
+  "sideEffects": false
 }
