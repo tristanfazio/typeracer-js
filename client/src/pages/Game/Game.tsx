@@ -7,7 +7,7 @@ import { FillState, GameState } from '../../state/gameState/gameStateReducer';
 import { AppDispatch, RootState } from '../../state/store';
 import styles from './Game.module.css';
 
-function Game() {
+const Game = () => {
     const gameState: GameState = useSelector(
         (state: RootState) => state.gameState,
     );
