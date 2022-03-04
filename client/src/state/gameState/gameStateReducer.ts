@@ -69,8 +69,9 @@ const gameStateReducer = (
     action: GameAction,
 ): GameState => {
     switch (action.type) {
-        case UPDATE_GAME_STATE:
-            return { ...(action as UpdateGameStateAction).gameState };
+        case UPDATE_GAME_STATE: {
+            const updateAction = action as UpdateGameStateAction;
+            return { ...updateAction.gameState }; }
         case SET_GAME_FINISHED:
             return {...state, isFinished: true}
         default:

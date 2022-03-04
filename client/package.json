@@ -51,5 +51,11 @@
     "tabWidth": 4,
     "trailingComma": "all"
   },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
   "sideEffects": false
 }

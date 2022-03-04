@@ -3,12 +3,12 @@ import { GameState } from './gameStateReducer';
 
 export type GameAction = UpdateGameStateAction | SetGameFinishedAction;
 
-export type UpdateGameStateAction = {
+export interface UpdateGameStateAction  {
     type: string;
     gameState: GameState;
 };
 
-export type SetGameFinishedAction = {
+export interface SetGameFinishedAction  {
     type: string;
 };
 
