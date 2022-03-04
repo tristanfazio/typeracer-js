@@ -1,0 +1,9 @@
+.timerContainer {
+    float: left;
+}
+
+.timerLabel {
+    color: white;
+    font-weight: bolder;
+    font-size: larger;
+}

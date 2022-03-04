@@ -1,7 +1,8 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PlayerContainer from '../../components/PlayerContainer';
 import QuoteContainer from '../../components/QuoteContainer';
+import Timer from '../../components/Timer';
 import { updateGameState } from '../../state/gameState/actionCreators';
 import { FillState, GameState } from '../../state/gameState/gameStateReducer';
 import { AppDispatch, RootState } from '../../state/store';
@@ -32,15 +33,15 @@ const Game = () => {
         //TODO: add header guard for isGameStarted
         if (e.location !== KeyboardEvent.DOM_KEY_LOCATION_STANDARD) return;
         if (gameState.currentWordIndex === gameState.quoteArray.length) return;
-        
+        if (gameState.isFinished) return;
+
         console.log(gameState);
+        gameState.isStarted = true;
 
         const quoteArray = gameState.quoteArray;
         const currentWordIndex = gameState.currentWordIndex;
         const currentLetterIndex = gameState.currentLetterIndex;
         const currentLetter = quoteArray[currentWordIndex][currentLetterIndex];
-
-
 
         console.log(
             `Current Letter: ${currentLetter.character} | Pressed Key: ${e.key}`,
@@ -127,14 +128,17 @@ const Game = () => {
                         key='player-container'
                         gameState={gameState}
                     />,
-                    <QuoteContainer
-                        key='quote-container'
-                        gameState={gameState}
-                    />,
+                    <div className={styles.gameContainer}>
+                        <Timer initialTime = {gameState.initialTime}/>
+                        <QuoteContainer
+                            key='quote-container'
+                            gameState={gameState}
+                        />
+                    </div>,
                 ]
             )}
         </div>
     );
-}
+};
 
 export default Game;

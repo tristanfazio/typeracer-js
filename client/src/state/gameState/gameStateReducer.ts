@@ -1,5 +1,9 @@
-import { UpdateGameStateAction } from './actionCreators';
-import { UPDATE_GAME_STATE } from './actions';
+import {
+    GameAction,
+    SetGameFinishedAction,
+    UpdateGameStateAction,
+} from './actionCreators';
+import { SET_GAME_FINISHED, UPDATE_GAME_STATE } from './actions';
 
 const testString =
     `You followed your conscience in the hope that others would follow theirs. ` +
@@ -37,6 +41,9 @@ export interface Player {
 export interface GameState {
     gameId: string;
     isLoading: boolean;
+    isStarted: boolean;
+    isFinished: boolean;
+    initialTime: number;
     playerList: Player[];
     quoteArray: CharElement[][];
     currentWordIndex: number;
@@ -47,6 +54,9 @@ export interface GameState {
 export const initialState: GameState = {
     gameId: 'test-game-id-123',
     isLoading: false,
+    isStarted: false,
+    isFinished: false,
+    initialTime: 60,
     playerList: [{ playerId: '1', playerName: 'Player 1', progress: 0 }],
     quoteArray: parseInitialQuoteToWords(testString),
     currentWordIndex: 0,
@@ -56,11 +66,13 @@ export const initialState: GameState = {
 
 const gameStateReducer = (
     state = initialState,
-    action: UpdateGameStateAction,
+    action: GameAction,
 ): GameState => {
     switch (action.type) {
         case UPDATE_GAME_STATE:
-            return { ...action.gameState };
+            return { ...(action as UpdateGameStateAction).gameState };
+        case SET_GAME_FINISHED:
+            return {...state, isFinished: true}
         default:
             return initialState;
     }

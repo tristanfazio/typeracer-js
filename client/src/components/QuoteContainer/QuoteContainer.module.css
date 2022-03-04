@@ -1,7 +1,6 @@
 .quoteContainer {
     background-color: #50546d;
     border-radius: 8px;
-    grid-area: quote-container;
 
     display: flex;
     flex-direction: row;
@@ -13,6 +12,7 @@
     font-size: x-large;
     font-weight: bold;
     padding: 8px;
+    height: 100%;
 }
 
 .correct {

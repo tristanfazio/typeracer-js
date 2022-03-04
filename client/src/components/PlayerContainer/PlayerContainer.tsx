@@ -16,10 +16,6 @@ const PlayerContainer = (props: { gameState: GameState }) => {
                     />
                 );
             })}
-            <div className = { styles.statsContainer }>
-                <span>WPM: 30</span>
-                <span>59s</span>
-            </div>
         </div>
     );
 };
