@@ -20,5 +20,11 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap:0px;
+    margin: 24px 8px 8px 8px;
+}
+
+.timerLabel {
+    color: white;
+    font-weight: bolder;
+    font-size: larger;
 }

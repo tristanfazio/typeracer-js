@@ -1,18 +1,24 @@
 .playerContainer {
-    background-color: #555973;
-    border-radius: 8px;
     grid-area: player-container;
-    box-sizing: border-box;
-
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    align-self: end;
+    margin: 8px;
+}
 
-    color: whitesmoke;
+.playerItems {
+    display: flex;
     margin: auto;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #555973;
+    border-radius: 8px;
+    color: whitesmoke;
     padding: 8px;
     width: 100%;
     max-height: fit-content;
+    box-sizing: border-box;
+
 }
 
 .statsContainer {

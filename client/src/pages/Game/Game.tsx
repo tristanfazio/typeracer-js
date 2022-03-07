@@ -7,6 +7,8 @@ import { updateGameState } from '../../state/gameState/actionCreators';
 import { FillState, GameState } from '../../state/gameState/gameStateReducer';
 import { AppDispatch, RootState } from '../../state/store';
 import styles from './Game.module.css';
+import { CountdownCircleTimer } from 'react-countdown-circle-timer'
+
 
 const Game = () => {
     const gameState: GameState = useSelector(
@@ -129,7 +131,17 @@ const Game = () => {
                         gameState={gameState}
                     />,
                     <div className={styles.gameContainer}>
-                        <Timer initialTime = {gameState.initialTime}/>
+                        <CountdownCircleTimer 
+                            isPlaying = {gameState.isStarted}
+                            duration = {gameState.initialTime}
+                            colors = "#4AE08C"
+                            size = {45}
+                            strokeWidth = {3}
+                            trailStrokeWidth = {3}
+                        > 
+                                {({ remainingTime }) => <div className = {styles.timerLabel}>{remainingTime}</div>}
+                        </CountdownCircleTimer>
+                        {/* <Timer initialTime = {gameState.initialTime}/> */}
                         <QuoteContainer
                             key='quote-container'
                             gameState={gameState}

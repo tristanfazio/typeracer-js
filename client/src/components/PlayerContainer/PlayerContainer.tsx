@@ -7,15 +7,17 @@ const PlayerContainer = (props: { gameState: GameState }) => {
 
     return (
         <div className={styles.playerContainer}>
-            {gameState.playerList.map((player) => {
-                return (
-                    <PlayerElement
-                        playerName={player.playerName}
-                        bgColour='#06D6A0'
-                        progress={player.progress}
-                    />
-                );
-            })}
+            <div className={styles.playerItems}>
+                {gameState.playerList.map((player) => {
+                    return (
+                        <PlayerElement
+                            playerName={player.playerName}
+                            bgColour='#06D6A0'
+                            progress={player.progress}
+                        />
+                    );
+                })}
+            </div>
         </div>
     );
 };
