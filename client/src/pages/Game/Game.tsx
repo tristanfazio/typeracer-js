@@ -3,18 +3,38 @@ import { useDispatch, useSelector } from 'react-redux';
 import PlayerContainer from '../../components/PlayerContainer';
 import QuoteContainer from '../../components/QuoteContainer';
 import Timer from '../../components/Timer';
-import { updateGameState } from '../../state/gameState/actionCreators';
-import { FillState, GameState } from '../../state/gameState/gameStateReducer';
+import {
+    setStatusCountdown,
+    setStatusFinished,
+    setStatusPlaying,
+    updateGameState,
+} from '../../state/gameState/actionCreators';
+import {
+    FillState,
+    GameState,
+    GameStatus,
+} from '../../state/gameState/gameStateReducer';
 import { AppDispatch, RootState } from '../../state/store';
 import styles from './Game.module.css';
-import { CountdownCircleTimer } from 'react-countdown-circle-timer'
-
+import { CountdownCircleTimer } from 'react-countdown-circle-timer';
 
 const Game = () => {
     const gameState: GameState = useSelector(
         (state: RootState) => state.gameState,
     );
+    const gameStatus = useSelector(
+        (state: RootState) => state.gameState.status,
+    );
     const dispatch: AppDispatch = useDispatch();
+
+    //fake loading
+    useEffect(() => {
+        if(gameStatus === GameStatus.LOADING) {
+            setTimeout(() => {
+                dispatch(setStatusCountdown());
+            }, 1000);
+        }
+    }, [dispatch, gameStatus]);
 
     useEffect(() => {
         window.addEventListener('keydown', onKeyDown);
@@ -24,30 +44,21 @@ const Game = () => {
         };
     }, []);
 
-    //fake loading
-    // useEffect(() => {
-    //     setTimeout(() => {
-    //         dispatch(updateGameState({ ...gameState, isLoading: false }));
-    //     }, 1000);
-    // }, []);
-
     const onKeyDown = (e: KeyboardEvent): void => {
-        //TODO: add header guard for isGameStarted
+        //TODO: Remove once countdown component created
+        console.log(gameState)
+        if (gameStatus === GameStatus.COUNTDOWN) {
+            dispatch(setStatusPlaying());
+        }
+
         if (e.location !== KeyboardEvent.DOM_KEY_LOCATION_STANDARD) return;
         if (gameState.currentWordIndex === gameState.quoteArray.length) return;
-        if (gameState.isFinished) return;
-
-        console.log(gameState);
-        gameState.isStarted = true;
+        if (gameStatus !== GameStatus.PLAYING) return;
 
         const quoteArray = gameState.quoteArray;
         const currentWordIndex = gameState.currentWordIndex;
         const currentLetterIndex = gameState.currentLetterIndex;
         const currentLetter = quoteArray[currentWordIndex][currentLetterIndex];
-
-        console.log(
-            `Current Letter: ${currentLetter.character} | Pressed Key: ${e.key}`,
-        );
 
         //check if backspace
         if (e.key === 'Backspace') {
@@ -101,8 +112,6 @@ const Game = () => {
         if (currentLetterIndex < quoteArray[currentWordIndex].length - 1) {
             //remaining letters, increment letter index
             gameState.currentLetterIndex++;
-            dispatch(updateGameState({ ...gameState }));
-            return;
         } else {
             //else, no remaining letters in word
             //reset letter index to 0
@@ -115,39 +124,56 @@ const Game = () => {
                 (gameState.completedWordCount / gameState.quoteArray.length) *
                     100,
             );
-            dispatch(updateGameState({ ...gameState }));
-            return;
+        }
+
+        dispatch(updateGameState({ ...gameState }));
+        if (gameState.completedWordCount === quoteArray.length) {
+            dispatch(setStatusFinished());
         }
     };
 
+    function renderGameComponents(): React.ReactElement<
+        React.JSXElementConstructor<any>
+    > {
+        return (
+            <>
+                <PlayerContainer key='player-container' gameState={gameState} />
+                ,
+                <div className={styles.gameContainer}>
+                    <CountdownCircleTimer
+                        isPlaying={gameStatus === GameStatus.PLAYING}
+                        duration={gameState.initialTime}
+                        colors='#4AE08C'
+                        size={45}
+                        strokeWidth={3}
+                        trailStrokeWidth={3}
+                    >
+                        {({ remainingTime }) => (
+                            <div className={styles.timerLabel}>
+                                {remainingTime}
+                            </div>
+                        )}
+                    </CountdownCircleTimer>
+                    <QuoteContainer
+                        key='quote-container'
+                        gameState={gameState}
+                    />
+                </div>
+                ,
+            </>
+        );
+    }
+
     return (
         <div className={styles.gamePage}>
-            {gameState.isLoading ? (
+            {gameStatus === GameStatus.LOADING && (
                 <p className={styles.loadingText}>Loading...</p>
-            ) : (
-                [
-                    <PlayerContainer
-                        key='player-container'
-                        gameState={gameState}
-                    />,
-                    <div className={styles.gameContainer}>
-                        <CountdownCircleTimer 
-                            isPlaying = {gameState.isStarted}
-                            duration = {gameState.initialTime}
-                            colors = "#4AE08C"
-                            size = {45}
-                            strokeWidth = {3}
-                            trailStrokeWidth = {3}
-                        > 
-                                {({ remainingTime }) => <div className = {styles.timerLabel}>{remainingTime}</div>}
-                        </CountdownCircleTimer>
-                        {/* <Timer initialTime = {gameState.initialTime}/> */}
-                        <QuoteContainer
-                            key='quote-container'
-                            gameState={gameState}
-                        />
-                    </div>,
-                ]
+            )}
+            {(gameStatus === GameStatus.COUNTDOWN ||
+                gameStatus === GameStatus.PLAYING) &&
+                renderGameComponents()}
+            {gameStatus === GameStatus.POSTGAME && (
+                <p className={styles.loadingText}>Loading...</p>
             )}
         </div>
     );

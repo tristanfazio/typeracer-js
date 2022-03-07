@@ -1,14 +1,14 @@
-import { SET_GAME_FINISHED, UPDATE_GAME_STATE } from './actions';
+import { SET_STATUS_FINISHED, SET_STATUS_COUNTDOWN, UPDATE_GAME_STATE, SET_STATUS_PLAYING } from './actions';
 import { GameState } from './gameStateReducer';
 
-export type GameAction = UpdateGameStateAction | SetGameFinishedAction;
+export type GameAction = UpdateGameStateAction | SetStatusAction;
 
 export interface UpdateGameStateAction  {
     type: string;
     gameState: GameState;
 };
 
-export interface SetGameFinishedAction  {
+export interface SetStatusAction  {
     type: string;
 };
 
@@ -20,9 +20,26 @@ export function updateGameState(gameState: GameState): UpdateGameStateAction {
     return action;
 }
 
-export function setGameFinished(): SetGameFinishedAction {
-    const action: SetGameFinishedAction = {
-        type: SET_GAME_FINISHED,
+export function setStatusFinished(): SetStatusAction {
+    const action: SetStatusAction = {
+        type: SET_STATUS_FINISHED,
     };
+    console.log("FINISHED");
+    return action;
+}
+
+export function setStatusCountdown(): SetStatusAction {
+    const action: SetStatusAction = {
+        type: SET_STATUS_COUNTDOWN,
+    };
+    console.log("COUNTDOWN");
+    return action;
+}
+
+export function setStatusPlaying(): SetStatusAction {
+    const action: SetStatusAction = {
+        type: SET_STATUS_PLAYING,
+    };
+    console.log("PLAYING");
     return action;
 }

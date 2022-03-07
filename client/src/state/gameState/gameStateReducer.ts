@@ -1,9 +1,8 @@
 import {
     GameAction,
-    SetGameFinishedAction,
     UpdateGameStateAction,
 } from './actionCreators';
-import { SET_GAME_FINISHED, UPDATE_GAME_STATE } from './actions';
+import { SET_STATUS_COUNTDOWN, SET_STATUS_FINISHED, UPDATE_GAME_STATE } from './actions';
 
 const testString =
     `You followed your conscience in the hope that others would follow theirs. ` +
@@ -38,11 +37,17 @@ export interface Player {
     progress: number;
 }
 
+export enum GameStatus {
+    LOADING = 'LOADING',
+    COUNTDOWN = 'COUNTDOWN',
+    PLAYING = 'PLAYING',
+    FINISHED = 'FINISHED',
+    POSTGAME = 'POSTGAME',
+}
+
 export interface GameState {
     gameId: string;
-    isLoading: boolean;
-    isStarted: boolean;
-    isFinished: boolean;
+    status: GameStatus;
     initialTime: number;
     playerList: Player[];
     quoteArray: CharElement[][];
@@ -53,9 +58,7 @@ export interface GameState {
 
 export const initialState: GameState = {
     gameId: 'test-game-id-123',
-    isLoading: false,
-    isStarted: false,
-    isFinished: false,
+    status: GameStatus.LOADING,
     initialTime: 60,
     playerList: [{ playerId: '1', playerName: 'Player 1', progress: 0 }],
     quoteArray: parseInitialQuoteToWords(testString),
@@ -65,15 +68,19 @@ export const initialState: GameState = {
 };
 
 const gameStateReducer = (
-    state = initialState,
+    state: GameState,
     action: GameAction,
 ): GameState => {
     switch (action.type) {
         case UPDATE_GAME_STATE: {
             const updateAction = action as UpdateGameStateAction;
-            return { ...updateAction.gameState }; }
-        case SET_GAME_FINISHED:
-            return {...state, isFinished: true}
+            return { ...updateAction.gameState };
+        }
+        case SET_STATUS_COUNTDOWN: {
+            return { ...state, status: GameStatus.COUNTDOWN };
+        }
+        case SET_STATUS_FINISHED:
+            return { ...state, status: GameStatus.FINISHED };
         default:
             return initialState;
     }
