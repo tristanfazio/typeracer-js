@@ -56,11 +56,18 @@ const QuoteContainer = (props: { gameState: GameState }) => {
         );
     });
     return (
-        <p className={styles.quoteContainer}>
+        <div className={styles.quoteContainer}>
             {mappedComponents}
-            {status === GameStatus.COUNTDOWN ? <Countdown /> : <></>}
-        </p>
+            {status === GameStatus.COUNTDOWN && <Countdown />}
+            {status === GameStatus.FINISHED && <Finish />}
+        </div>
     );
 };
+
+const Finish = () => {
+    return (
+        <div className = {styles.finish}>Finish!</div>
+    )
+}
 
 export default QuoteContainer;
