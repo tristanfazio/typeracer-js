@@ -130,7 +130,7 @@ const Game = () => {
             dispatch(setStatusFinished());
         }
     };
-    
+
     function renderGameComponents(): React.ReactElement<
         React.JSXElementConstructor<any>
     > {
