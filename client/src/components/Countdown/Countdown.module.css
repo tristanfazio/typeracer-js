@@ -1,0 +1,31 @@
+.counterContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #50546d;
+    height: 100%;
+    width: 100%;
+    border-radius: 8px;
+}
+
+.font {
+    font-family: 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode',
+    'Lucida Sans', Tahoma, sans-serif;
+    font-style: normal;
+    font-variant: small-caps;
+    font-weight: 700;
+    line-height: 26.4px;
+    color: white;
+}
+
+.type {
+    font-size: 36px;
+}
+
+.preamble {
+    font-size: 26px;
+}

@@ -1,4 +1,4 @@
-import { SET_STATUS_FINISHED, SET_STATUS_COUNTDOWN, UPDATE_GAME_STATE, SET_STATUS_PLAYING } from './actions';
+import { SET_STATUS_FINISHED, SET_STATUS_COUNTDOWN, UPDATE_GAME_STATE, SET_STATUS_PLAYING, SET_STATUS_POSTGAME } from './actions';
 import { GameState } from './gameStateReducer';
 
 export type GameAction = UpdateGameStateAction | SetStatusAction;
@@ -41,5 +41,13 @@ export function setStatusPlaying(): SetStatusAction {
         type: SET_STATUS_PLAYING,
     };
     console.log("PLAYING");
+    return action;
+}
+
+export function setStatusPostgame(): SetStatusAction {
+    const action: SetStatusAction = {
+        type: SET_STATUS_POSTGAME,
+    };
+    console.log("POSTGAME");
     return action;
 }

@@ -1,8 +1,11 @@
+import { GameAction, UpdateGameStateAction } from './actionCreators';
 import {
-    GameAction,
-    UpdateGameStateAction,
-} from './actionCreators';
-import { SET_STATUS_COUNTDOWN, SET_STATUS_FINISHED, SET_STATUS_PLAYING, UPDATE_GAME_STATE } from './actions';
+    SET_STATUS_COUNTDOWN,
+    SET_STATUS_FINISHED,
+    SET_STATUS_PLAYING,
+    SET_STATUS_POSTGAME,
+    UPDATE_GAME_STATE,
+} from './actions';
 
 const testString =
     `You followed your conscience in the hope that others would follow theirs. ` +
@@ -58,8 +61,8 @@ export interface GameState {
 
 export const initialState: GameState = {
     gameId: 'test-game-id-123',
-    status: GameStatus.LOADING,
-    initialTime: 60,
+    status: GameStatus.COUNTDOWN,
+    initialTime: 5,
     playerList: [{ playerId: '1', playerName: 'Player 1', progress: 0 }],
     quoteArray: parseInitialQuoteToWords(testString),
     currentWordIndex: 0,
@@ -76,12 +79,14 @@ const gameStateReducer = (
             const updateAction = action as UpdateGameStateAction;
             return { ...updateAction.gameState };
         }
-        case SET_STATUS_COUNTDOWN: 
+        case SET_STATUS_COUNTDOWN:
             return { ...state, status: GameStatus.COUNTDOWN };
-        case SET_STATUS_FINISHED: 
+        case SET_STATUS_FINISHED:
             return { ...state, status: GameStatus.FINISHED };
-        case SET_STATUS_PLAYING: 
+        case SET_STATUS_PLAYING:
             return { ...state, status: GameStatus.PLAYING };
+        case SET_STATUS_POSTGAME:
+            return { ...state, status: GameStatus.POSTGAME };
         default:
             return state;
     }

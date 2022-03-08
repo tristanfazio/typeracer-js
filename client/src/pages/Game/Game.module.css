@@ -1,9 +1,10 @@
 .gamePage {
     display: inline-grid;
     grid-template-columns: 0.5fr 2fr 0.5fr;
-    grid-template-rows: auto;
+    grid-template-rows: 1fr 1fr 1fr clamp(0fr,1fr);
     grid-template-areas:
         '. player-container .'
+        '. quote-container .'
         '. quote-container .'
         '. . .';
     height: 100%;

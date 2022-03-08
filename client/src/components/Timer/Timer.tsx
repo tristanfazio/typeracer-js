@@ -1,28 +1,22 @@
-// import { useEffect, useState } from 'react';
-// import { useDispatch, useSelector } from 'react-redux';
-// import { setGameFinished } from '../../state/gameState/actionCreators';
-// import { AppDispatch, RootState } from '../../state/store';
+import { useEffect, useState } from 'react';
 import styles from './Timer.module.css';
 
-const Timer = (props: { initialTime: number }) => {
-    // const isStarted: boolean = useSelector(
-    //     (state: RootState) => state.gameState.isStarted,
-    // );
-    // const dispatch: AppDispatch = useDispatch();
+const Timer = (props: { initialTime: number; onFinish: () => void }) => {
+    const [counter, setCounter] = useState(props.initialTime);
+    const onFinish = props.onFinish;
 
+    useEffect(() => {
+        if (counter === 0) {
+            onFinish();
+            return;
+        }
 
-    // const [counter, setCounter] = useState(props.initialTime);
-    
-    // useEffect(() => {
-    //     if(counter === 0) {
-    //         dispatch(setGameFinished());
-    //     }
-    //     counter > 0 && isStarted && setTimeout(() => setCounter(counter - 1), 1000);
-    // }, [counter, isStarted]);
+        counter > 0 && setTimeout(() => setCounter(counter - 1), 1000);
+    }, [counter, onFinish]);
 
     return (
         <div className={styles.timerContainer}>
-            {/* <span className={styles.timerLabel}>{`${counter}s`}</span> */}
+            <span className={styles.timerLabel}>{`${counter}s`}</span>
         </div>
     );
 };

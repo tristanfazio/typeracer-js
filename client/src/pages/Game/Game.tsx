@@ -2,11 +2,10 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PlayerContainer from '../../components/PlayerContainer';
 import QuoteContainer from '../../components/QuoteContainer';
-import Timer from '../../components/Timer';
 import {
     setStatusCountdown,
     setStatusFinished,
-    setStatusPlaying,
+    setStatusPostgame,
     updateGameState,
 } from '../../state/gameState/actionCreators';
 import {
@@ -27,20 +26,21 @@ const Game = () => {
     );
     const dispatch: AppDispatch = useDispatch();
 
-    //fake loading
+    //Handle Status Transitions
     useEffect(() => {
-        if(gameStatus === GameStatus.LOADING) {
+        //fake loading
+        if (gameStatus === GameStatus.LOADING) {
             setTimeout(() => {
                 dispatch(setStatusCountdown());
             }, 1000);
         }
 
-        //TODO: Remove once countdown component created
-        //transition from countdown to playing
-        if (gameStatus === GameStatus.COUNTDOWN) {
-            dispatch(setStatusPlaying());
+        if (gameStatus === GameStatus.FINISHED) {
+            setTimeout(() => {
+                dispatch(setStatusPostgame());
+            }, 2000);
         }
-    }, [gameStatus]);
+    }, [dispatch, gameStatus]);
 
     useEffect(() => {
         window.addEventListener('keydown', onKeyDown);
@@ -130,14 +130,13 @@ const Game = () => {
             dispatch(setStatusFinished());
         }
     };
-
+    
     function renderGameComponents(): React.ReactElement<
         React.JSXElementConstructor<any>
     > {
         return (
             <>
                 <PlayerContainer key='player-container' gameState={gameState} />
-                ,
                 <div className={styles.gameContainer}>
                     <CountdownCircleTimer
                         isPlaying={gameStatus === GameStatus.PLAYING}
@@ -146,6 +145,9 @@ const Game = () => {
                         size={45}
                         strokeWidth={3}
                         trailStrokeWidth={3}
+                        onComplete={() => {
+                            dispatch(setStatusFinished());
+                        }}
                     >
                         {({ remainingTime }) => (
                             <div className={styles.timerLabel}>
@@ -163,17 +165,19 @@ const Game = () => {
         );
     }
 
+    const isLoading = gameStatus === GameStatus.LOADING;
+    const isGameViewable = [
+        GameStatus.COUNTDOWN,
+        GameStatus.PLAYING,
+        GameStatus.FINISHED,
+    ].includes(gameStatus);
+    const isPostGame = gameStatus === GameStatus.POSTGAME;
+
     return (
         <div className={styles.gamePage}>
-            {gameStatus === GameStatus.LOADING && (
-                <p className={styles.loadingText}>Loading...</p>
-            )}
-            {(gameStatus === GameStatus.COUNTDOWN ||
-                gameStatus === GameStatus.PLAYING) &&
-                renderGameComponents()}
-            {gameStatus === GameStatus.POSTGAME && (
-                <p className={styles.loadingText}>Loading...</p>
-            )}
+            {isLoading && <p className={styles.loadingText}>Loading...</p>}
+            {isGameViewable && renderGameComponents()}
+            {isPostGame && <p className={styles.loadingText}>Post Game</p>}
         </div>
     );
 };

@@ -1,9 +1,16 @@
-import { FillState, GameState } from '../../state/gameState/gameStateReducer';
+import {
+    FillState,
+    GameState,
+    GameStatus,
+} from '../../state/gameState/gameStateReducer';
+import Countdown from '../Countdown';
 import styles from './QuoteContainer.module.css';
 
 const QuoteContainer = (props: { gameState: GameState }) => {
+    //TODO: possibly remove props drilling and use reducer to determine state
     const gameState = props.gameState;
     const quoteArray = gameState.quoteArray;
+    const status = gameState.status;
     const mappedComponents = quoteArray.map((word, wordIndex) => {
         return (
             <span
@@ -15,8 +22,8 @@ const QuoteContainer = (props: { gameState: GameState }) => {
                 {word.map((letter, letterIndex) => {
                     const key = `${wordIndex}-${letterIndex}`;
                     const cursor =
-                        wordIndex == gameState.currentWordIndex &&
-                        letterIndex == gameState.currentLetterIndex
+                        wordIndex === gameState.currentWordIndex &&
+                        letterIndex === gameState.currentLetterIndex
                             ? styles.cursor
                             : '';
 
@@ -34,7 +41,7 @@ const QuoteContainer = (props: { gameState: GameState }) => {
 
                     const style = error + correct + cursor;
                     const element =
-                        letter.character == ' ' ? (
+                        letter.character === ' ' ? (
                             <span key={key} className={style}>
                                 &nbsp;
                             </span>
@@ -48,7 +55,12 @@ const QuoteContainer = (props: { gameState: GameState }) => {
             </span>
         );
     });
-    return <p className={styles.quoteContainer}>{mappedComponents}</p>;
+    return (
+        <p className={styles.quoteContainer}>
+            {mappedComponents}
+            {status === GameStatus.COUNTDOWN ? <Countdown /> : <></>}
+        </p>
+    );
 };
 
 export default QuoteContainer;
