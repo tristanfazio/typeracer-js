@@ -34,7 +34,13 @@ const Game = () => {
                 dispatch(setStatusCountdown());
             }, 1000);
         }
-    }, [dispatch, gameStatus]);
+
+        //TODO: Remove once countdown component created
+        //transition from countdown to playing
+        if (gameStatus === GameStatus.COUNTDOWN) {
+            dispatch(setStatusPlaying());
+        }
+    }, [gameStatus]);
 
     useEffect(() => {
         window.addEventListener('keydown', onKeyDown);
@@ -42,17 +48,10 @@ const Game = () => {
         return () => {
             window.removeEventListener('keydown', onKeyDown);
         };
-    }, []);
+    }, [gameStatus]);
 
     const onKeyDown = (e: KeyboardEvent): void => {
-        //TODO: Remove once countdown component created
-        console.log(gameState)
-        if (gameStatus === GameStatus.COUNTDOWN) {
-            dispatch(setStatusPlaying());
-        }
-
         if (e.location !== KeyboardEvent.DOM_KEY_LOCATION_STANDARD) return;
-        if (gameState.currentWordIndex === gameState.quoteArray.length) return;
         if (gameStatus !== GameStatus.PLAYING) return;
 
         const quoteArray = gameState.quoteArray;

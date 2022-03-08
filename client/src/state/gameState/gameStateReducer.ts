@@ -2,7 +2,7 @@ import {
     GameAction,
     UpdateGameStateAction,
 } from './actionCreators';
-import { SET_STATUS_COUNTDOWN, SET_STATUS_FINISHED, UPDATE_GAME_STATE } from './actions';
+import { SET_STATUS_COUNTDOWN, SET_STATUS_FINISHED, SET_STATUS_PLAYING, UPDATE_GAME_STATE } from './actions';
 
 const testString =
     `You followed your conscience in the hope that others would follow theirs. ` +
@@ -68,7 +68,7 @@ export const initialState: GameState = {
 };
 
 const gameStateReducer = (
-    state: GameState,
+    state = initialState,
     action: GameAction,
 ): GameState => {
     switch (action.type) {
@@ -76,13 +76,14 @@ const gameStateReducer = (
             const updateAction = action as UpdateGameStateAction;
             return { ...updateAction.gameState };
         }
-        case SET_STATUS_COUNTDOWN: {
+        case SET_STATUS_COUNTDOWN: 
             return { ...state, status: GameStatus.COUNTDOWN };
-        }
-        case SET_STATUS_FINISHED:
+        case SET_STATUS_FINISHED: 
             return { ...state, status: GameStatus.FINISHED };
+        case SET_STATUS_PLAYING: 
+            return { ...state, status: GameStatus.PLAYING };
         default:
-            return initialState;
+            return state;
     }
 };
 
