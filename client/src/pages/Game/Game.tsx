@@ -16,6 +16,7 @@ import {
 import { AppDispatch, RootState } from '../../state/store';
 import styles from './Game.module.css';
 import { CountdownCircleTimer } from 'react-countdown-circle-timer';
+import PostGame from '../../components/PostGame';
 
 const Game = () => {
     const gameState: GameState = useSelector(
@@ -177,7 +178,7 @@ const Game = () => {
         <div className={styles.gamePage}>
             {isLoading && <p className={styles.loadingText}>Loading...</p>}
             {isGameViewable && renderGameComponents()}
-            {isPostGame && <p className={styles.loadingText}>Post Game</p>}
+            {isPostGame && <PostGame/>}
         </div>
     );
 };
