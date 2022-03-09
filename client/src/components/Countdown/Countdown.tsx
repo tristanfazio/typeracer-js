@@ -22,7 +22,7 @@ const CountDown = () => {
             {counting ? (
                 <>
                     <p className={`${styles.font} ${styles.preamble}`}>
-                        When the quote appears start typing!
+                        Start typing when the quote appears!
                     </p>
                     <Timer initialTime={3} onFinish={onFinish} />
                 </>

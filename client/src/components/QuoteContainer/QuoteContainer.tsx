@@ -65,7 +65,7 @@ const QuoteContainer = (props: { gameState: GameState }) => {
 };
 
 const Finish = () => {
-    return <div className={styles.finish}>Finish!</div>;
+    return <div className={styles.finish}>Times Up!</div>;
 };
 
 export default QuoteContainer;
