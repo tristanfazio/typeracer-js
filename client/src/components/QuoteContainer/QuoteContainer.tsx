@@ -55,17 +55,20 @@ const QuoteContainer = (props: { gameState: GameState }) => {
             </span>
         );
     });
+
+    const finishedQuote = gameState.completedWordCount === gameState.quoteArray.length;
     return (
         <div className={styles.quoteContainer}>
             {mappedComponents}
             {status === GameStatus.COUNTDOWN && <Countdown />}
-            {status === GameStatus.FINISHED && <Finish />}
+            {status === GameStatus.FINISHED && <Finish finishedQuote = { finishedQuote } />}
         </div>
     );
 };
 
-const Finish = () => {
-    return <div className={styles.finish}>Times Up!</div>;
+const Finish = ({finishedQuote}) => {
+    const finishText = finishedQuote ? <p>Finished!</p> : <p>Times Up!</p>;
+    return (<div className={styles.finish}>{finishText}</div>);
 };
 
 export default QuoteContainer;
