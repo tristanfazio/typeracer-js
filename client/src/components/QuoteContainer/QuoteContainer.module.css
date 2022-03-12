@@ -19,23 +19,6 @@
     box-sizing: border-box;
 }
 
-.correct {
-    color: #4AE08C;
-}
-
-.error {
-    color: #F1A9A0;
-}
-
-.errorSpace {
-    border-bottom: 3px solid #F1A9A0;
-}
-
-.cursor {
-    border-bottom: 3px solid white;
-    color: white;
-}
-
 .finish {
     display: flex;
     flex-direction: column;

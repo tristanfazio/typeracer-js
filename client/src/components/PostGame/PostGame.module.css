@@ -1,6 +1,6 @@
 .postGameContainer {
-    grid-column-start: 1;
-    grid-column-end: 4;
+    grid-column-start: 2;
+    grid-column-end: 3;
     grid-row-start: 1;
     grid-row-end: 5;
     height: 100%;
@@ -19,10 +19,64 @@
 
 }
 
-.postGameQuote {
+.postGameQuoteContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
 
+    color: whitesmoke;
+    font-size: medium;
+    font-weight: bold;
+    margin: 8px;
+    padding: 8px;
+    height: fit-content;
+    width: fit-content;
+    box-sizing: border-box;
+}
+
+.author {
+    font-size: small;
+    font-weight: normal;
+    font-style: italic;
+    float: left;
+    color: whitesmoke;
+    align-self: flex-start;
+    margin: 8px;
 }
 
 .playAgainButton {
+    background-color: #0A8754;
+    flex-grow: 0.5;
+    padding: 8px;
+    border: solid 2px #0A8754;
+}
 
+.buttonContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.joinGameButton:hover {
+    background-color: #086e45;
+}
+
+.button {
+    border-radius: 16px;
+    border: solid 2px #282A36;
+    color: white;
+    cursor: pointer;
+    font-size: large;
+    padding: 16px;
+    width: 100%;
+    margin-top: 16px;
+}
+    
+input {
+    margin-top: 16px;
+    width: 98%;
+    border-radius: 8px;
+    padding: 8px;
 }

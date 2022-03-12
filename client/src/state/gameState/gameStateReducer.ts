@@ -54,6 +54,7 @@ export interface GameState {
     initialTime: number;
     playerList: Player[];
     quoteArray: CharElement[][];
+    author: string;
     currentWordIndex: number;
     currentLetterIndex: number;
     completedWordCount: number;
@@ -65,12 +66,13 @@ export const initialState: GameState = {
     initialTime: 3,
     playerList: [{ playerId: '1', playerName: 'Player 1', progress: 0 }],
     quoteArray: parseInitialQuoteToWords(testString),
+    author: 'Naomi Nagata',
     currentWordIndex: 0,
     currentLetterIndex: 0,
     completedWordCount: 0,
 };
 
-const gameStateReducer = (
+const  gameStateReducer = (
     state = initialState,
     action: GameAction,
 ): GameState => {
