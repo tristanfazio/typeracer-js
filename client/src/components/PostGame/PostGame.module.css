@@ -3,23 +3,48 @@
     grid-column-end: 3;
     grid-row-start: 1;
     grid-row-end: 5;
+
     height: 100%;
     width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+
+    display: inline-grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-template-areas:
+        '. rating .'
+        'stat1 stat2 stat3'
+        'quote quote quote'
+        '. play-again .';
     align-items: center;
+    height: 100%;
+    width: 100%;
 }
 
 .rating {
-
+    color: whitesmoke;
+    grid-area: rating;
+    font-size: 48px;
 }
 
-.statsContainer {
+.stat1 {
+    grid-area: stat1;
+}
 
+.stat2 {
+    grid-area: stat2;
+}
+
+.stat3 {
+    grid-area: stat3;
 }
 
 .postGameQuoteContainer {
+    grid-area: quote;
+    display: flex;
+    flex-direction: column;
+}
+
+.postGameQuote {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -42,33 +67,35 @@
     font-style: italic;
     float: left;
     color: whitesmoke;
-    align-self: flex-start;
     margin: 8px;
 }
 
 .playAgainButton {
-    background-color: #0A8754;
+    background-color: #229749;
     flex-grow: 0.5;
     padding: 8px;
-    border: solid 2px #0A8754;
+    border: solid 2px #229749;
 }
 
 .buttonContainer {
+    grid-area: play-again;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
+    align-self: baseline;
 }
 
-.joinGameButton:hover {
-    background-color: #086e45;
+.playAgainButton:hover {
+    background-color: #1e803f;
 }
 
 .button {
     border-radius: 16px;
     border: solid 2px #282A36;
-    color: white;
+    color: whitesmoke;
     cursor: pointer;
     font-size: large;
+    font-weight: 600;
     padding: 16px;
     width: 100%;
     margin-top: 16px;

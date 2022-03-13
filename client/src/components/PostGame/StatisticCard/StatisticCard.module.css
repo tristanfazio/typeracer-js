@@ -1,0 +1,41 @@
+.statisticCard {
+    display: grid;
+    grid-template-columns: 200px;
+    grid-template-rows: 100px, 100px, 100px;
+    grid-template-areas:
+        'title'
+        'value'
+        'subtext';
+    align-items: center;
+    justify-items: center;
+    background-color: #50546d;
+    border-radius: 8px;
+    
+    margin: auto;
+    max-width: 200px;
+    height: 300px;
+}
+
+.title {
+    grid-area: title;
+    background-color: #45485c;
+    color: whitesmoke;
+    width: 100%;
+    align-self: flex-start;
+    margin: 0;
+    padding: 8px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    box-sizing: border-box;
+}
+
+.valueContainer {
+    grid-area: value;
+    color: whitesmoke
+}
+
+.subText {
+    grid-area: subtext;
+    color: whitesmoke;
+    margin: 0;
+}
