@@ -1,22 +1,42 @@
-import { SET_STATUS_FINISHED, SET_STATUS_COUNTDOWN, UPDATE_GAME_STATE, SET_STATUS_PLAYING, SET_STATUS_POSTGAME } from './actions';
-import { GameState } from './gameStateReducer';
+import {
+    SET_STATUS_COUNTDOWN,
+    SET_STATUS_FINISHED,
+    SET_STATUS_PLAYING,
+    SET_STATUS_POSTGAME,
+    UPDATE_GAME_STATE,
+    UPDATE_GAME_TIME
+} from './actions';
+import {GameState} from './gameStateReducer';
 
-export type GameAction = UpdateGameStateAction | SetStatusAction;
+export type GameAction = UpdateGameStateAction | SetStatusAction | UpdateGameTimeAction;
 
-export interface UpdateGameStateAction  {
+export interface UpdateGameStateAction {
     type: string;
     gameState: GameState;
-};
+}
 
-export interface SetStatusAction  {
+export interface SetStatusAction {
     type: string;
-};
+}
+
+export interface UpdateGameTimeAction {
+    type: string;
+    time: number;
+}
 
 export function updateGameState(gameState: GameState): UpdateGameStateAction {
     const action: UpdateGameStateAction = {
         type: UPDATE_GAME_STATE,
-        gameState: gameState,
+        gameState,
     };
+    return action;
+}
+
+export function updateGameTime(time: number): UpdateGameTimeAction {
+    const action: UpdateGameTimeAction = {
+        type: UPDATE_GAME_TIME,
+        time,
+    }
     return action;
 }
 

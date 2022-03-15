@@ -1,9 +1,9 @@
-import { useSelector } from 'react-redux';
-import { FillState } from '../../state/gameState/gameStateReducer';
-import { RootState } from '../../state/store';
+import {useSelector} from 'react-redux';
+import {FillState} from '../../state/gameState/gameStateReducer';
+import {RootState} from '../../state/store';
 import styles from './Quote.module.css';
 
-export function Quote({ quoteArray }) {
+export function Quote({quoteArray}) {
     const currentWordIndex = useSelector(
         (state: RootState) => state.gameState.currentWordIndex,
     );
@@ -36,17 +36,15 @@ export function Quote({ quoteArray }) {
                                 : styles.error
                             : '';
                     const style = error + correct + cursor;
-                    const element =
-                        letter.character === ' ' ? (
-                            <span key={key} className={style}>
+                    return letter.character === ' ' ? (
+                        <span key={key} className={`${style} ${styles.font}`}>
                                 &nbsp;
                             </span>
-                        ) : (
-                            <span key={key} className={`${style} ${styles.font}`}>
+                    ) : (
+                        <span key={key} className={`${style} ${styles.font}`}>
                                 {letter.character}
-                            </span>
-                        );
-                    return element;
+                        </span>
+                    );
                 })}
             </span>
         );

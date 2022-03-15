@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, {useEffect} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 import PlayerContainer from '../../components/PlayerContainer';
 import QuoteContainer from '../../components/QuoteContainer';
 import {
@@ -7,15 +7,12 @@ import {
     setStatusFinished,
     setStatusPostgame,
     updateGameState,
+    updateGameTime,
 } from '../../state/gameState/actionCreators';
-import {
-    FillState,
-    GameState,
-    GameStatus,
-} from '../../state/gameState/gameStateReducer';
-import { AppDispatch, RootState } from '../../state/store';
+import {FillState, GameState, GameStatus,} from '../../state/gameState/gameStateReducer';
+import {AppDispatch, RootState} from '../../state/store';
 import styles from './Game.module.css';
-import { CountdownCircleTimer } from 'react-countdown-circle-timer';
+import {CountdownCircleTimer} from 'react-countdown-circle-timer';
 import PostGame from '../../components/PostGame';
 
 const Game = () => {
@@ -27,9 +24,9 @@ const Game = () => {
     );
     const dispatch: AppDispatch = useDispatch();
 
-    //Handle Status Transitions
+    // Handle Status Transitions
     useEffect(() => {
-        //fake loading
+        // fake loading
         if (gameStatus === GameStatus.LOADING) {
             setTimeout(() => {
                 dispatch(setStatusCountdown());
@@ -60,84 +57,87 @@ const Game = () => {
         const currentLetterIndex = gameState.currentLetterIndex;
         const currentLetter = quoteArray[currentWordIndex][currentLetterIndex];
 
-        //check if backspace
+        // check if backspace
         if (e.key === 'Backspace') {
             if (currentWordIndex === 0 && currentLetterIndex === 0) return;
-            //mark current letter as default
+            // mark current letter as default
             gameState.quoteArray[currentWordIndex][
                 currentLetterIndex
-            ].fillState = FillState.DEFAULT;
+                ].fillState = FillState.DEFAULT;
 
             let previousLetterIndex = currentLetterIndex;
             let previousWordIndex = currentWordIndex;
 
-            //decrement indexes
+            // decrement indexes
             if (currentLetterIndex > 0) {
-                //mid word, only decrement letter
+                // mid word, only decrement letter
                 previousLetterIndex = gameState.currentLetterIndex - 1;
             } else {
-                //travers back a word
+                // travers back a word
                 previousWordIndex = gameState.currentWordIndex - 1;
                 previousLetterIndex = quoteArray[previousWordIndex].length - 1;
                 gameState.completedWordCount--;
             }
 
-            //update state object
+            // update state object
             gameState.currentLetterIndex = previousLetterIndex;
             gameState.currentWordIndex = previousWordIndex;
             gameState.quoteArray[previousWordIndex][
                 previousLetterIndex
-            ].fillState = FillState.CURSOR;
+                ].fillState = FillState.CURSOR;
+            gameState.completedLetterCount--;
 
             // send state and return out before other checks
-            dispatch(updateGameState({ ...gameState }));
+            dispatch(updateGameState({...gameState}));
             return;
         }
 
-        //check if correct
+        // check if correct
         if (currentLetter.character === e.key.toString()) {
-            //correct
-            //mark letter correct
+            // correct
+            // mark letter correct
             gameState.quoteArray[currentWordIndex][
                 currentLetterIndex
-            ].fillState = FillState.CORRECT;
+                ].fillState = FillState.CORRECT;
         } else {
-            //incorrect keypress
-            //mark letter incorrect
+            // incorrect keypress
+            // mark letter incorrect
             gameState.quoteArray[currentWordIndex][
                 currentLetterIndex
-            ].fillState = FillState.ERROR;
+                ].fillState = FillState.ERROR;
+            gameState.errors++;
         }
-        //check for remaining letters in word
+
+        // check for remaining letters in word
         if (currentLetterIndex < quoteArray[currentWordIndex].length - 1) {
-            //remaining letters, increment letter index
+            // remaining letters, increment letter index
             gameState.currentLetterIndex++;
         } else {
-            //else, no remaining letters in word
-            //reset letter index to 0
+            // else, no remaining letters in word
+            // reset letter index to 0
             gameState.currentLetterIndex = 0;
-            //progress word index
+            // progress word index
             gameState.currentWordIndex++;
-            //update player progress
+            // update player progress
             gameState.completedWordCount++;
             gameState.playerList[0].progress = Math.trunc(
                 (gameState.completedWordCount / gameState.quoteArray.length) *
-                    100,
+                100,
             );
         }
+        gameState.completedLetterCount++;
 
-        dispatch(updateGameState({ ...gameState }));
+
+        dispatch(updateGameState({...gameState}));
         if (gameState.completedWordCount === quoteArray.length) {
             dispatch(setStatusFinished());
         }
     };
 
-    function renderGameComponents(): React.ReactElement<
-        React.JSXElementConstructor<any>
-    > {
+    function renderGameComponents(): React.ReactElement<React.JSXElementConstructor<any>> {
         return (
             <>
-                <PlayerContainer key='player-container' gameState={gameState} />
+                <PlayerContainer key='player-container' gameState={gameState}/>
                 <div className={styles.gameContainer}>
                     <CountdownCircleTimer
                         isPlaying={gameStatus === GameStatus.PLAYING}
@@ -149,8 +149,11 @@ const Game = () => {
                         onComplete={() => {
                             dispatch(setStatusFinished());
                         }}
+                        onUpdate={(remainingTime: number) => {
+                            dispatch(updateGameTime(remainingTime));
+                        }}
                     >
-                        {({ remainingTime }) => (
+                        {({remainingTime}) => (
                             <div className={styles.timerLabel}>
                                 {remainingTime}
                             </div>
