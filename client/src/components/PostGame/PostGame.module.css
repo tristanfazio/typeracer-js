@@ -9,13 +9,14 @@
 
     display: inline-grid;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-template-rows: repeat(4, minmax(auto, 1fr));
     grid-template-areas:
         '. rating .'
         'stat1 stat2 stat3'
         'quote quote quote'
         '. play-again .';
     align-items: center;
+    justify-items: center;
     height: 100%;
     width: 100%;
 }
@@ -28,14 +29,17 @@
 
 .stat1 {
     grid-area: stat1;
+    height: 100%;
 }
 
 .stat2 {
     grid-area: stat2;
+    height: 100%;
 }
 
 .stat3 {
     grid-area: stat3;
+    height: 100%;
 }
 
 .postGameQuoteContainer {

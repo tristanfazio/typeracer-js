@@ -1,7 +1,7 @@
 .statisticCard {
     display: grid;
     grid-template-columns: 200px;
-    grid-template-rows: 100px, 100px, 100px;
+    grid-template-rows: repeat(3, minmax(auto, 1fr));
     grid-template-areas:
         'title'
         'value'
@@ -10,10 +10,9 @@
     justify-items: center;
     background-color: #50546d;
     border-radius: 8px;
-    
-    margin: auto;
+    margin-left: 8px;
     max-width: 200px;
-    height: 300px;
+    height: 100%;
 }
 
 .title {
@@ -31,7 +30,7 @@
 
 .valueContainer {
     grid-area: value;
-    color: whitesmoke
+    color: whitesmoke;
 }
 
 .subText {

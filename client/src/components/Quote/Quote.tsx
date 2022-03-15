@@ -42,7 +42,7 @@ export function Quote({ quoteArray }) {
                                 &nbsp;
                             </span>
                         ) : (
-                            <span key={key} className={style}>
+                            <span key={key} className={`${style} ${styles.font}`}>
                                 {letter.character}
                             </span>
                         );

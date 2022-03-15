@@ -7,10 +7,14 @@
 }
 
 .errorSpace {
-    border-bottom: 3px solid #F1A9A0;
+    border-bottom: 2px solid #F1A9A0;
 }
 
 .cursor {
-    border-bottom: 3px solid white;
+    border-right: 2px solid white;
     color: white;
+}
+
+.font {
+    font-family: 'JetBrains Mono', monospace;
 }

@@ -1,5 +1,5 @@
 .quoteContainer {
-    background-color: #50546d;
+    background-color: #45485c;
     border-radius: 8px;
     position: relative;
 
@@ -38,7 +38,7 @@
     font-variant: small-caps;
     font-weight: 700;
     line-height: 26.4px;
-    color: white;
+    color: #d4d4d4;
 
     font-size: 36px;
 }
