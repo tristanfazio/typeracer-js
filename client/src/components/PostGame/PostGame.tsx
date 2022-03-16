@@ -1,25 +1,13 @@
-import {useSelector} from 'react-redux';
-import {RootState} from '../../state/store';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../state/store';
 import Quote from '../Quote';
 import styles from './PostGame.module.css';
-import {StatisticCard, StatisticCardProps,} from './StatisticCard/StatisticCard';
+import {
+    StatisticCard,
+    StatisticCardProps,
+} from './StatisticCard/StatisticCard';
 
 const PostGame = () => {
-    return (
-        <div className={styles.postGameContainer}>
-            <Rating/>
-            <StatsContainer/>
-            <PostGameQuote/>
-            <PlayAgainButton/>
-        </div>
-    );
-};
-
-const Rating = () => {
-    return <div className={styles.rating}>{`Rating: ${`A+`}`}</div>;
-};
-
-const StatsContainer = () => {
     const completedWordCount = useSelector(
         (state: RootState) => state.gameState.completedWordCount,
     );
@@ -31,39 +19,90 @@ const StatsContainer = () => {
     );
     const initialTime = useSelector(
         (state: RootState) => state.gameState.initialTime,
-    )
+    );
     const elapsedTime = useSelector(
         (state: RootState) => state.gameState.gameTime,
-    )
-    const errors = useSelector(
-        (state: RootState) => state.gameState.errors,
     );
+    const errors = useSelector((state: RootState) => state.gameState.errors);
 
     const completionPercent = Math.trunc(
         (completedWordCount / wordCount) * 100,
     );
-    const wpm = (completedLettersCount / 5) / ((initialTime - elapsedTime) / 60);
-    const accuracy = Math.trunc((completedLettersCount - errors) / completedLettersCount * 100);
+    const wpm = completedLettersCount / 5 / ((initialTime - elapsedTime) / 60);
+    const accuracy = Math.trunc(
+        ((completedLettersCount - errors) / completedLettersCount) * 100,
+    );
 
+    return (
+        <div className={styles.postGameContainer}>
+            <Rating completionPercent={completionPercent} accuracy={accuracy} />
+            <StatsContainer
+                completionPercent={completionPercent}
+                accuracy={accuracy}
+                wpm={wpm}
+                errors={errors}
+            />
+            <PostGameQuote />
+            <PlayAgainButton />
+        </div>
+    );
+};
 
+const Rating = (props: { completionPercent: number; accuracy: number }) => {
+    const score = (props.completionPercent * 1.5 * props.accuracy) / 100;
+    const getRating = function(score: number) {
+        if (score >= 90) {
+            return 'A+';
+        }
+        if (score >= 80) {
+            return 'A';
+        }
+        if (score >= 70) {
+            return 'B';
+        }
+        if (score >= 60) {
+            return 'C';
+        }
+        if (score >= 50) {
+            return 'D';
+        }
+        if (score <= 50) {
+            return 'F';
+        }
+    };
+    const rating = getRating(score);
+    return (
+        <div className={styles.titleContainer}>
+            <p className={styles.title}>Score Card</p>
+            <div className={styles.rating}>{rating}</div>
+        </div>
+    );
+};
+
+const StatsContainer = (props: {
+    completionPercent: number;
+    accuracy: number;
+    wpm: number;
+    errors: number;
+}) => {
     const completionProps: StatisticCardProps = {
         title: 'Completion',
         circle: true,
-        value: completionPercent,
+        value: props.completionPercent,
         percentage: true,
     };
     const wpmProps: StatisticCardProps = {
         title: 'WPM',
         circle: false,
-        value: wpm,
+        value: props.wpm,
         percentage: false,
     };
     const accuracyProps: StatisticCardProps = {
         title: 'Accuracy',
         circle: true,
-        value: accuracy,
+        value: props.accuracy,
         percentage: true,
-        subText: `Errors: ${errors}`,
+        subText: `Errors: ${props.errors}`,
     };
 
     return (
@@ -91,7 +130,7 @@ const PostGameQuote = () => {
         <>
             <div className={styles.postGameQuoteContainer}>
                 <div className={styles.postGameQuote}>
-                    <Quote quoteArray={quoteArray}/>
+                    <Quote quoteArray={quoteArray} />
                 </div>
                 <p className={styles.author}>{`- ${author}`}</p>
             </div>
@@ -104,8 +143,7 @@ const PlayAgainButton = () => {
         <div className={styles.buttonContainer}>
             <button
                 type='button'
-                onClick={() => {
-                }}
+                onClick={() => {}}
                 className={`
         ${styles.button} 
         ${styles.playAgainButton}`}

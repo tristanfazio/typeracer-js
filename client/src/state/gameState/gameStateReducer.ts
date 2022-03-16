@@ -68,7 +68,7 @@ export interface GameState {
 export const initialState: GameState = {
     gameId: 'test-game-id-123',
     status: GameStatus.COUNTDOWN,
-    initialTime: 30,
+    initialTime: 60,
     playerList: [{playerId: '1', playerName: 'Player 1', progress: 0}],
     quoteArray: parseInitialQuoteToWords(testString),
     author: 'Naomi Nagata',
