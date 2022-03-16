@@ -19,15 +19,31 @@
     justify-items: center;
 }
 
+.titleContainer {
+    grid-area: rating;
+}
+
+.title {
+    font-family: 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode',
+    'Lucida Sans', Tahoma, sans-serif;
+    font-size: xx-large;
+    font-style: normal;
+    font-variant: small-caps;
+    font-weight: 700;
+    line-height: 26.4px;
+    color: white;
+}
+
 .rating {
     color: whitesmoke;
-    grid-area: rating;
     font-size: 48px;
 }
 
 .stat1 {
     grid-area: stat1;
     height: 100%;
+    justify-self: flex-start;
+    margin-left: 32px;
 }
 
 .stat2 {
@@ -38,12 +54,19 @@
 .stat3 {
     grid-area: stat3;
     height: 100%;
+    justify-self: flex-end;
+    margin-right: 32px;
 }
 
 .postGameQuoteContainer {
     grid-area: quote;
     display: flex;
     flex-direction: column;
+    border: 3px solid #50546d;
+    border-radius: 5px;
+    margin-left: 32px;
+    margin-right: 32px;
+
 }
 
 .postGameQuote {
