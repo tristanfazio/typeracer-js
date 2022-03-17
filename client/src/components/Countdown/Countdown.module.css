@@ -14,10 +14,10 @@
 
 .font {
     font-style: normal;
-    font-variant: small-caps;
     font-weight: 700;
     line-height: 26.4px;
     color: white;
+    font-family: 'IBM Plex Sans', sans-serif;
 }
 
 .type {
