@@ -24,18 +24,15 @@
 }
 
 .title {
-    font-family: 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode',
-    'Lucida Sans', Tahoma, sans-serif;
     font-size: xx-large;
     font-style: normal;
-    font-variant: small-caps;
     font-weight: 700;
     line-height: 26.4px;
-    color: white;
+    color: #d4d4d4;
 }
 
 .rating {
-    color: whitesmoke;
+    color: #d4d4d4;
     font-size: 48px;
 }
 
@@ -118,7 +115,7 @@
 .button {
     border-radius: 16px;
     border: solid 2px #282A36;
-    color: whitesmoke;
+    color: #d4d4d4;
     cursor: pointer;
     font-size: large;
     font-weight: 600;

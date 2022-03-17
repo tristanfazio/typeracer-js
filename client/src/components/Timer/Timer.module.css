@@ -3,12 +3,11 @@
 }
 
 .timerLabel {
-    font-family: 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode',
-    'Lucida Sans', Tahoma, sans-serif;
     font-size: 36px;
     font-style: normal;
     font-variant: small-caps;
     font-weight: 700;
     line-height: 26.4px;
     color: white;
+    font-family: 'JetBrains Mono', monospace;
 }

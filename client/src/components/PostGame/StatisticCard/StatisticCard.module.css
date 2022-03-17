@@ -12,12 +12,13 @@
     border-radius: 8px;
     max-width: 200px;
     height: 100%;
+    font-family: 'JetBrains Mono', monospace;
 }
 
 .title {
     grid-area: title;
     background-color: #45485c;
-    color: whitesmoke;
+    color: #d4d4d4;
     width: 100%;
     align-self: flex-start;
     margin: 0;
@@ -25,15 +26,16 @@
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
     box-sizing: border-box;
+    font-family: 'IBM Plex Sans', sans-serif;
 }
 
 .valueContainer {
     grid-area: value;
-    color: whitesmoke;
+    color: #d4d4d4;
 }
 
 .subText {
     grid-area: subtext;
-    color: whitesmoke;
+    color: #d4d4d4;
     margin: 0;
 }

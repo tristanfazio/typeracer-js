@@ -28,10 +28,10 @@ const PostGame = () => {
     const completionPercent = Math.trunc(
         (completedWordCount / wordCount) * 100,
     );
-    const wpm = completedLettersCount / 5 / ((initialTime - elapsedTime) / 60);
-    const accuracy = Math.trunc(
-        ((completedLettersCount - errors) / completedLettersCount) * 100,
-    );
+    const wpm = Math.round(completedLettersCount / 5 / ((initialTime - elapsedTime) / 60));
+    const accuracy = completedLettersCount !== 0 ? Math.trunc(
+        ((completedLettersCount - errors) / completedLettersCount) * 100
+    ) : 0
 
     return (
         <div className={styles.postGameContainer}>
@@ -73,7 +73,7 @@ const Rating = (props: { completionPercent: number; accuracy: number }) => {
     const rating = getRating(score);
     return (
         <div className={styles.titleContainer}>
-            <p className={styles.title}>Score Card</p>
+            <p className={styles.title}>SCORE CARD</p>
             <div className={styles.rating}>{rating}</div>
         </div>
     );
@@ -148,7 +148,7 @@ const PlayAgainButton = () => {
         ${styles.button} 
         ${styles.playAgainButton}`}
             >
-                Play again?
+                Play again
             </button>
         </div>
     );
