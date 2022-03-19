@@ -1,5 +1,6 @@
-import { useSelector } from 'react-redux';
-import { RootState } from '../../state/store';
+import { useDispatch, useSelector } from 'react-redux';
+import { initGame } from '../../state/gameState/actionCreators';
+import { AppDispatch, RootState } from '../../state/store';
 import Quote from '../Quote';
 import styles from './PostGame.module.css';
 import {
@@ -139,11 +140,13 @@ const PostGameQuote = () => {
 };
 
 const PlayAgainButton = () => {
+    const dispatch: AppDispatch = useDispatch();
+
     return (
         <div className={styles.buttonContainer}>
             <button
                 type='button'
-                onClick={() => {}}
+                onClick={() => { dispatch(initGame()) }}
                 className={`
         ${styles.button} 
         ${styles.playAgainButton}`}

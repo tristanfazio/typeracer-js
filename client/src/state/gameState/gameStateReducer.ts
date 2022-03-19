@@ -6,6 +6,7 @@ import {
     SET_STATUS_POSTGAME,
     UPDATE_GAME_STATE,
     UPDATE_GAME_TIME,
+    INIT_GAME,
 } from './actions';
 
 const testString =
@@ -93,6 +94,9 @@ const gameStateReducer = (
             const updateAction = action as UpdateGameTimeAction;
             console.log(updateAction.time)
             return {...state, gameTime: updateAction.time}
+        }
+        case INIT_GAME: {
+            return {...initialState}
         }
         case SET_STATUS_COUNTDOWN:
             return {...state, status: GameStatus.COUNTDOWN};
