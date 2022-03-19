@@ -1,12 +1,12 @@
 import {GameAction, UpdateGameStateAction, UpdateGameTimeAction} from './actionCreators';
 import {
+    INIT_GAME,
     SET_STATUS_COUNTDOWN,
     SET_STATUS_FINISHED,
     SET_STATUS_PLAYING,
     SET_STATUS_POSTGAME,
     UPDATE_GAME_STATE,
     UPDATE_GAME_TIME,
-    INIT_GAME,
 } from './actions';
 
 const testString =
@@ -113,10 +113,12 @@ const gameStateReducer = (
 
 export default gameStateReducer;
 
-function parseInitialQuoteToWords(testString: string): CharElement[][] {
-    return testString.split(/(\s+)/).map((word) => {
-        return word.split('').map((charElement, index) => {
-            return new CharElement(charElement, index);
+function parseInitialQuoteToWords(quote: string): CharElement[][] {
+    return quote.split(/([^\s]+\s?)/g)
+        .filter((word) => word)
+        .map((word) => {
+            return word.split('').map((charElement, index) => {
+                return new CharElement(charElement, index);
+            });
         });
-    });
 }
