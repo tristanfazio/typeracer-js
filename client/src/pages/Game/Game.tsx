@@ -142,12 +142,12 @@ const Game = () => {
                     <CountdownCircleTimer
                         isPlaying={gameStatus === GameStatus.PLAYING}
                         duration={gameState.initialTime}
-                        colors='#4AE08C'
+                        colors='#9C9BF4'
                         size={45}
                         strokeWidth={3}
                         trailStrokeWidth={3}
                         onComplete={() => {
-                            dispatch(setStatusFinished());
+                            // dispatch(setStatusFinished());
                         }}
                         onUpdate={(remainingTime: number) => {
                             dispatch(updateGameTime(remainingTime));

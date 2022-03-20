@@ -1,3 +1,5 @@
+@import url("../../utils/global.css");
+
 .timerContainer {
     float: left;
 }
@@ -7,6 +9,6 @@
     font-style: normal;
     font-weight: 700;
     line-height: 26.4px;
-    color: white;
-    font-family: 'JetBrains Mono', monospace;
+    color: var(--font-body-grey);
+    font-family: var(--font-body);
 }

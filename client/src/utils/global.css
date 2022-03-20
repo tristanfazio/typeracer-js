@@ -1,0 +1,16 @@
+:root {
+    --page-background: #282A36;
+    --card-header: #50546D;
+    --card-background: #3A3D4F;
+
+    --primary-green: #69CFBB;
+    --secondary-purple: #9C9BF4;
+    --error-orange: #F89C65;
+    --alert-red: #F66979;
+    --impact-yellow: #FAD02F;
+    --cool-blue: #5D8BE2;
+
+    --font-header: 'IBM Plex Sans', sans-serif;;
+    --font-body: 'JetBrains Mono', monospace;
+    --font-body-grey: #D4D4D4;
+}

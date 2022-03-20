@@ -1,3 +1,5 @@
+@import url("../../utils/global.css");
+
 .playerContainer {
     grid-area: player-container;
     display: flex;
@@ -11,9 +13,9 @@
     margin: auto;
     flex-direction: column;
     justify-content: center;
-    background-color: #555973;
+    background-color: var(--card-header);
     border-radius: 8px;
-    color: whitesmoke;
+    color: var(--font-body-grey);
     padding: 8px;
     width: 100%;
     max-height: fit-content;
@@ -28,10 +30,8 @@
     align-items: center;
 
 
-    color: white;
+    color: var(--font-body-grey);
     font-weight: bold;
-    text-shadow: -1px -1px 0 #686868, 1px -1px 0 #686868, -1px 1px 0 #686868,
-        1px 1px 0 #686868;
 }
 
 .statsContainer span {

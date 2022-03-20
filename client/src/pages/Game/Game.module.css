@@ -1,7 +1,9 @@
+@import url("../../utils/global.css");
+
 .gamePage {
     display: inline-grid;
     grid-template-columns: 0.5fr 2fr 0.5fr;
-    grid-template-rows: 1fr 1fr 1fr clamp(0fr,1fr);
+    grid-template-rows: 1fr 1fr 1fr clamp(0fr, 1fr, 1fr);
     grid-template-areas:
         '. player-container .'
         '. quote-container .'
@@ -13,7 +15,7 @@
 
 .loadingText {
     grid-area: quote-container;
-    color: antiquewhite;
+    color: var(--font-body-grey);
 }
 
 .gameContainer {
@@ -25,7 +27,7 @@
 }
 
 .timerLabel {
-    color: white;
+    color: var(--font-body-grey);
     font-weight: bolder;
     font-size: larger;
 }

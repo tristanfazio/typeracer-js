@@ -1,9 +1,11 @@
+@import url("./utils/global.css");
+
 body {
   margin: 0;
-  font-family: 'IBM Plex Sans', sans-serif;
+  font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #282A36;
+  background-color: var(--page-background);
   overflow: hidden;
   height: 100%;
   width: 100%;

@@ -1,5 +1,5 @@
-import PlayerElement  from '../PlayerElement';
-import { GameState } from '../../state/gameState/gameStateReducer';
+import PlayerElement from '../PlayerElement';
+import {GameState} from '../../state/gameState/gameStateReducer';
 import styles from './PlayerContainer.module.css';
 
 const PlayerContainer = (props: { gameState: GameState }) => {
@@ -12,7 +12,6 @@ const PlayerContainer = (props: { gameState: GameState }) => {
                     return (
                         <PlayerElement
                             playerName={player.playerName}
-                            bgColour='#06D6A0'
                             progress={player.progress}
                         />
                     );

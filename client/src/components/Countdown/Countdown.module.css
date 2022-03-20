@@ -1,3 +1,5 @@
+@import url("../../utils/global.css");
+
 .counterContainer {
     display: flex;
     flex-direction: column;
@@ -6,7 +8,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    background-color: #50546d;
+    background-color: var(--card-background);
     height: 100%;
     width: 100%;
     border-radius: 8px;
@@ -16,8 +18,8 @@
     font-style: normal;
     font-weight: 700;
     line-height: 26.4px;
-    color: white;
-    font-family: 'IBM Plex Sans', sans-serif;
+    color: var(--font-body-grey);
+    font-family: var(--font-header);
 }
 
 .type {

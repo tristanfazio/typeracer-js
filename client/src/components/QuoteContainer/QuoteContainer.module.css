@@ -1,34 +1,36 @@
+@import url("../../utils/global.css");
+
 .quoteContainer {
-    background-color: #45485c;
+    background-color: var(--card-background);
     border-radius: 8px;
     position: relative;
 
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
 
-    color: #d4d4d4;
+    color: var(--font-body-grey);
     font-size: x-large;
     font-weight: bold;
     margin-top: 16px;
-    padding: 8px;
+    padding-left: 2rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
     height: 100%;
     width: 100%;
     box-sizing: border-box;
-    font-family: 'IBM Plex Sans', sans-serif;
+    font-family: var(--font-header);
 }
 
 .finish {
-    display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
     position: absolute;
     top: 0;
     left: 0;
-    background-color: #50546d;
+    background-color: var(--card-background);
     height: 100%;
     width: 100%;
     border-radius: 8px;
@@ -36,7 +38,7 @@
     font-style: normal;
     font-weight: 700;
     line-height: 26.4px;
-    color: #d4d4d4;
+    color: var(--font-body-grey);
 
     font-size: 36px;
 }

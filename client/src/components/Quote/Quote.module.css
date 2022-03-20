@@ -1,18 +1,20 @@
+@import url("../../utils/global.css");
+
 .font {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-body);
     border: 1px solid transparent;
 }
 
 .correct {
-    color: #4AE08C;
+    color: var(--primary-green);
 }
 
 .error {
-    color: #F1A9A0;
+    color: var(--error-orange);
 }
 
 .errorSpace {
-    border-bottom: 2px solid #F1A9A0;
+    border-bottom: 2px solid var(--error-orange);
 }
 
 .cursor {

@@ -1,7 +1,9 @@
+@import url("../../utils/global.css");
+
 .progressBarBackground {
     height: 24px;
     width: 100%;
-    background-color: #e0e0de;
+    background-color: var(--card-background);
     border-radius: 50px;
     margin: 8px;
 }
@@ -11,6 +13,7 @@
     border-radius: inherit;
     text-align: right;
     min-width: fit-content;
+    background-color: var(--secondary-purple);
 }
 
 .progressBarLabel {

@@ -1,10 +1,10 @@
-import { Quote } from './../Quote/Quote';
-import { GameState, GameStatus } from '../../state/gameState/gameStateReducer';
+import Quote from './../Quote/';
+import {GameState, GameStatus} from '../../state/gameState/gameStateReducer';
 import Countdown from '../Countdown';
 import styles from './QuoteContainer.module.css';
 
 const QuoteContainer = (props: { gameState: GameState }) => {
-    //TODO: possibly remove props drilling and use reducer to determine state
+    // TODO: possibly remove props drilling and use reducer to determine state
     const gameState = props.gameState;
     const quoteArray = gameState.quoteArray;
     const status = gameState.status;
