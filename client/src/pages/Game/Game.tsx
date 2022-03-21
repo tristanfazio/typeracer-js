@@ -2,7 +2,12 @@ import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import PlayerContainer from '../../components/PlayerContainer';
 import QuoteContainer from '../../components/QuoteContainer';
-import {setStatusCountdown, setStatusFinished, updateGameState,} from '../../state/gameState/actionCreators';
+import {
+    setStatusCountdown,
+    setStatusFinished,
+    setStatusPostgame,
+    updateGameState,
+} from '../../state/gameState/actionCreators';
 import {FillState, GameState, GameStatus,} from '../../state/gameState/gameStateReducer';
 import {AppDispatch, RootState} from '../../state/store';
 import styles from './Game.module.css';
@@ -28,7 +33,7 @@ const Game = () => {
 
         if (gameStatus === GameStatus.FINISHED) {
             setTimeout(() => {
-                // dispatch(setStatusPostgame());
+                dispatch(setStatusPostgame());
             }, 2000);
         }
     }, [dispatch, gameStatus]);
