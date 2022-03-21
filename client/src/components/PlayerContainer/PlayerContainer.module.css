@@ -3,37 +3,58 @@
 .playerContainer {
     grid-area: player-container;
     display: flex;
-    flex-direction: column;
-    align-self: end;
-    margin: 8px;
-}
-
-.playerItems {
-    display: flex;
-    margin: auto;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
+    align-items: center;
+    position: relative;
+
     background-color: var(--card-header);
-    border-radius: 8px;
     color: var(--font-body-grey);
-    padding: 8px;
+
+    border-radius: 8px;
+    padding: 16px 24px;
+    margin-bottom: -8px;
+
+    height: 72px;
     width: 100%;
     max-height: fit-content;
     box-sizing: border-box;
 
+    z-index: 1;
 }
 
-.statsContainer {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    align-items: center;
-
-
+.progressLabel {
+    margin-left: 8px;
+    margin-right: 8px;
     color: var(--font-body-grey);
     font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
-.statsContainer span {
-    margin-right: 16px;
+.dots {
+    position: absolute;
+    left: 24px;
+    top: 0px
+}
+
+.dot {
+    height: 8px;
+    width: 8px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 8px;
+}
+
+.red {
+    background-color: var(--alert-red);
+}
+
+.yellow {
+    background-color: var(--impact-yellow);
+}
+
+.green {
+    background-color: var(--primary-green);
 }

@@ -4,8 +4,8 @@
     height: 24px;
     width: 100%;
     background-color: var(--card-background);
-    border-radius: 50px;
-    margin: 8px;
+    border-radius: 16px;
+    margin-right: 24px;
 }
 
 .progressBarFiller {

@@ -2,17 +2,10 @@ import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import PlayerContainer from '../../components/PlayerContainer';
 import QuoteContainer from '../../components/QuoteContainer';
-import {
-    setStatusCountdown,
-    setStatusFinished,
-    setStatusPostgame,
-    updateGameState,
-    updateGameTime,
-} from '../../state/gameState/actionCreators';
+import {setStatusCountdown, setStatusFinished, updateGameState,} from '../../state/gameState/actionCreators';
 import {FillState, GameState, GameStatus,} from '../../state/gameState/gameStateReducer';
 import {AppDispatch, RootState} from '../../state/store';
 import styles from './Game.module.css';
-import {CountdownCircleTimer} from 'react-countdown-circle-timer';
 import PostGame from '../../components/PostGame';
 
 const Game = () => {
@@ -35,7 +28,7 @@ const Game = () => {
 
         if (gameStatus === GameStatus.FINISHED) {
             setTimeout(() => {
-                dispatch(setStatusPostgame());
+                // dispatch(setStatusPostgame());
             }, 2000);
         }
     }, [dispatch, gameStatus]);
@@ -137,28 +130,8 @@ const Game = () => {
     function renderGameComponents(): React.ReactElement<React.JSXElementConstructor<any>> {
         return (
             <>
-                <PlayerContainer key='player-container' gameState={gameState}/>
                 <div className={styles.gameContainer}>
-                    <CountdownCircleTimer
-                        isPlaying={gameStatus === GameStatus.PLAYING}
-                        duration={gameState.initialTime}
-                        colors='#9C9BF4'
-                        size={45}
-                        strokeWidth={3}
-                        trailStrokeWidth={3}
-                        onComplete={() => {
-                            // dispatch(setStatusFinished());
-                        }}
-                        onUpdate={(remainingTime: number) => {
-                            dispatch(updateGameTime(remainingTime));
-                        }}
-                    >
-                        {({remainingTime}) => (
-                            <div className={styles.timerLabel}>
-                                {remainingTime}
-                            </div>
-                        )}
-                    </CountdownCircleTimer>
+                    <PlayerContainer key='player-container' gameState={gameState}/>
                     <QuoteContainer
                         key='quote-container'
                         gameState={gameState}

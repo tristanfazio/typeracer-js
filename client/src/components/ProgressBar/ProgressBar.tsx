@@ -1,10 +1,6 @@
 import styles from './ProgressBar.module.css';
 
-interface ProgressBarProps {
-    progress: number;
-}
-
-const ProgressBar = (props: ProgressBarProps) => {
+const ProgressBar = (props: { progress: number }) => {
     const {progress} = props;
     return (
         <div className={styles.progressBarBackground}>
