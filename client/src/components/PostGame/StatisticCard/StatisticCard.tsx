@@ -1,5 +1,13 @@
-import { CountdownCircleTimer } from 'react-countdown-circle-timer';
 import styles from './StatisticCard.module.css';
+import target from './images/target.svg';
+import speed from './images/speed.svg';
+import tape from './images/tape.svg';
+
+export enum CardIcon {
+    'TAPE' = 'TAPE',
+    'SPEED' = 'SPEED',
+    'TARGET' = 'TARGET'
+}
 
 export interface StatisticCardProps {
     title: string;
@@ -7,36 +15,38 @@ export interface StatisticCardProps {
     circle: boolean;
     percentage: boolean;
     subText?: string;
+    icon: CardIcon;
 }
-export const StatisticCard = (props: StatisticCardProps) => {
-    const { title, value, circle, percentage, subText } = props;
 
-    const renderStat = () => {
-        const valueLabel = percentage ? `${value} %` : `${value}`;
-        return circle ? (
-            <CountdownCircleTimer
-                isPlaying={false}
-                duration={100}
-                colors={['#4AE08C','#F1A9A0']}
-                colorsTime={[100,74]}
-                size={90}
-                strokeWidth={4}
-                trailStrokeWidth={4}
-                initialRemainingTime={value}
-            >
-                {() => <h3 className={styles.valueContainer}>{valueLabel}</h3>}
-            </CountdownCircleTimer>
-        ) : (
-            <h3 className={styles.valueContainer}>{valueLabel}</h3>
-        );
-    };
+export const StatisticCard = (props: StatisticCardProps) => {
+    const {title, value, percentage, subText, icon} = props;
+    const valueLabel = percentage ? `${value}%` : `${value}`;
+    const renderIcon = getIcon(icon)
     return (
         <div className={styles.statisticCard}>
-            <h2 className={styles.title}>{title}</h2>
-            {renderStat()}
-            {subText && <div className={styles.subText}>{subText}</div>}
+            <div className={styles.iconContainer}>
+                <img src={renderIcon} alt={'Icon'}/>
+            </div>
+            <div className={styles.valueContainer}>
+                {valueLabel}
+                {subText && <div className={styles.subText}>{subText}</div>}
+            </div>
+            <div className={styles.cardHeader}>
+                <h2 className={styles.title}>{title}</h2>
+            </div>
         </div>
     );
 };
+
+function getIcon(iconType: CardIcon) {
+    switch (iconType) {
+        case CardIcon.SPEED:
+            return speed;
+        case CardIcon.TAPE:
+            return tape;
+        case CardIcon.TARGET:
+            return target;
+    }
+}
 
 export default StatisticCard;

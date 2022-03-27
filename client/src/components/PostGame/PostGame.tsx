@@ -1,12 +1,10 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { initGame } from '../../state/gameState/actionCreators';
-import { AppDispatch, RootState } from '../../state/store';
+import {useSelector} from 'react-redux';
+import {RootState} from '../../state/store';
 import Quote from '../Quote';
 import styles from './PostGame.module.css';
-import {
-    StatisticCard,
-    StatisticCardProps,
-} from './StatisticCard/StatisticCard';
+import {CardIcon, StatisticCard, StatisticCardProps,} from './StatisticCard/StatisticCard';
+import banner from './images/banner.svg';
+
 
 const PostGame = () => {
     const completedWordCount = useSelector(
@@ -43,15 +41,15 @@ const PostGame = () => {
                 wpm={wpm}
                 errors={errors}
             />
-            <PostGameQuote />
-            <PlayAgainButton />
+            {/*<PostGameQuote />*/}
+            {/*<PlayAgainButton />*/}
         </div>
     );
 };
 
 const Rating = (props: { completionPercent: number; accuracy: number }) => {
     const score = (props.completionPercent * 1.5 * props.accuracy) / 100;
-    const getRating = function(score: number) {
+    const getRating = (score: number) => {
         if (score >= 90) {
             return 'A+';
         }
@@ -74,8 +72,10 @@ const Rating = (props: { completionPercent: number; accuracy: number }) => {
     const rating = getRating(score);
     return (
         <div className={styles.titleContainer}>
-            <p className={styles.title}>SCORE CARD</p>
-            <div className={styles.rating}>{rating}</div>
+            <div className={styles.imageWrapper}>
+                <img src={banner} alt={'Banner'}/>
+                <div className={styles.rating}>{rating}</div>
+            </div>
         </div>
     );
 };
@@ -91,12 +91,14 @@ const StatsContainer = (props: {
         circle: true,
         value: props.completionPercent,
         percentage: true,
+        icon: CardIcon.TAPE
     };
     const wpmProps: StatisticCardProps = {
         title: 'WPM',
         circle: false,
         value: props.wpm,
         percentage: false,
+        icon: CardIcon.SPEED
     };
     const accuracyProps: StatisticCardProps = {
         title: 'Accuracy',
@@ -104,20 +106,15 @@ const StatsContainer = (props: {
         value: props.accuracy,
         percentage: true,
         subText: `Errors: ${props.errors}`,
+        icon: CardIcon.TARGET
     };
 
     return (
-        <>
-            <div className={styles.stat1}>
-                <StatisticCard {...completionProps} />
-            </div>
-            <div className={styles.stat2}>
-                <StatisticCard {...wpmProps} />
-            </div>
-            <div className={styles.stat3}>
-                <StatisticCard {...accuracyProps} />
-            </div>
-        </>
+        <div className={styles.statsContainer}>
+            <StatisticCard {...completionProps} />
+            <StatisticCard {...wpmProps} />
+            <StatisticCard {...accuracyProps} />
+        </div>
     );
 };
 
@@ -139,22 +136,22 @@ const PostGameQuote = () => {
     );
 };
 
-const PlayAgainButton = () => {
-    const dispatch: AppDispatch = useDispatch();
-
-    return (
-        <div className={styles.buttonContainer}>
-            <button
-                type='button'
-                onClick={() => { dispatch(initGame()) }}
-                className={`
-        ${styles.button} 
-        ${styles.playAgainButton}`}
-            >
-                Play again
-            </button>
-        </div>
-    );
-};
+// const PlayAgainButton = () => {
+//     const dispatch: AppDispatch = useDispatch();
+//
+//     return (
+//         <div className={styles.buttonContainer}>
+//             <button
+//                 type='button'
+//                 onClick={() => { dispatch(initGame()) }}
+//                 className={`
+//         ${styles.button}
+//         ${styles.playAgainButton}`}
+//             >
+//                 Play again
+//             </button>
+//         </div>
+//     );
+// };
 
 export default PostGame;

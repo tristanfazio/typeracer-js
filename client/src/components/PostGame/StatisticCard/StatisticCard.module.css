@@ -1,41 +1,91 @@
+@import url("../../../utils/global.css");
+
 .statisticCard {
-    display: grid;
-    grid-template-columns: 200px;
-    grid-template-rows: repeat(3, minmax(auto, 1fr));
-    grid-template-areas:
-        'title'
-        'value'
-        'subtext';
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-items: center;
-    background-color: #50546d;
+    justify-content: flex-end;
+    position: relative;
+
+    background-color: var(--card-background);
+
+    height: 172px;
+    width: 164px;
+    margin: 8px;
     border-radius: 8px;
-    max-width: 200px;
-    height: 100%;
+
     font-family: 'JetBrains Mono', monospace;
 }
 
-.title {
-    grid-area: title;
-    background-color: #45485c;
-    color: #d4d4d4;
+.cardHeader {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    background-color: var(--secondary-purple);
+
+    height: 100%;
     width: 100%;
-    align-self: flex-start;
-    margin: 0;
-    padding: 8px;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
-    box-sizing: border-box;
-    font-family: 'IBM Plex Sans', sans-serif;
+    max-width: 164px;
+    max-height: 48px;
+    border-radius: 8px;
+
+    justify-self: flex-end;
 }
 
+.title {
+    color: whitesmoke;
+    font-family: var(--font-header);
+    font-weight: 600;
+    font-size: 18px;
+    width: 100%;
+    margin: 0;
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+.iconContainer {
+    position: absolute;
+    top: -48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 80px;
+    width: 80px;
+    max-height: 80px;
+    max-width: 80px;
+
+    border-radius: 50%;
+    border: 5px solid var(--secondary-purple);
+    background-color: var(--card-header);
+}
+
+.iconContainer>img {
+    max-height: 56px;
+    max-width: 56px;
+}
+
+
 .valueContainer {
-    grid-area: value;
-    color: #d4d4d4;
+    color: whitesmoke;
+    font-size: 36px;
+    font-weight: 700;
+    font-family: var(--font-body);
+    margin-bottom: 24px;
+    position: relative;
+    width: 100%;
 }
 
 .subText {
-    grid-area: subtext;
-    color: #d4d4d4;
-    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 100%;
+    color: var(--font-body-grey);
+    font-size: 12px;
+    font-weight: 300;
+    width: 100%;
 }

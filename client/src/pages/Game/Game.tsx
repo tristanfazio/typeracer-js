@@ -142,7 +142,6 @@ const Game = () => {
                         gameState={gameState}
                     />
                 </div>
-                ,
             </>
         );
     }

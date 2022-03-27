@@ -8,51 +8,44 @@
     width: 100%;
     max-width: 1200px;
 
-    display: inline-grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: repeat(4, minmax(auto, 1fr));
-    grid-template-areas:
-        '. rating .'
-        'stat1 stat2 stat3'
-        'quote quote quote'
-        '. play-again .';
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-items: center;
+    justify-content: center;
 }
 
 .titleContainer {
-    grid-area: rating;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
-.title {
-    font-size: 56px;
-    font-style: normal;
-    font-weight: 700;
-    color: #d4d4d4;
-    border-bottom: 5px solid #d4d4d4;
-}
+.imageWrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;}
 
 .rating {
-    color: #d4d4d4;
-    font-size: 48px;
+    position: absolute;
+    color: whitesmoke;
     margin: auto;
+    bottom: 152px;
+    font-family: var(--font-header);
+    font-size: 128px;
+    font-weight: 600;
+    text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
 }
 
-.stat1 {
-    grid-area: stat1;
-    height: 100%;
-    justify-self: flex-end;
-}
-
-.stat2 {
-    grid-area: stat2;
-    height: 100%;
-}
-
-.stat3 {
-    grid-area: stat3;
-    height: 100%;
-    justify-self: flex-start;
+.statsContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: fit-content;
+    width: fit-content;
 }
 
 .postGameQuoteContainer {
@@ -91,40 +84,40 @@
     font-family: 'JetBrains Mono', monospace;
 }
 
-.playAgainButton {
-    background-color: #229749;
-    flex-grow: 0.5;
-    padding: 8px;
-    border: solid 2px #229749;
-}
+/*.playAgainButton {*/
+/*    background-color: #229749;*/
+/*    flex-grow: 0.5;*/
+/*    padding: 8px;*/
+/*    border: solid 2px #229749;*/
+/*}*/
 
-.buttonContainer {
-    grid-area: play-again;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-self: baseline;
-}
+/*.buttonContainer {*/
+/*    grid-area: play-again;*/
+/*    display: flex;*/
+/*    flex-direction: row;*/
+/*    justify-content: flex-start;*/
+/*    align-self: baseline;*/
+/*}*/
 
-.playAgainButton:hover {
-    background-color: #1e803f;
-}
+/*.playAgainButton:hover {*/
+/*    background-color: #1e803f;*/
+/*}*/
 
-.button {
-    border-radius: 16px;
-    border: solid 2px #282A36;
-    color: #d4d4d4;
-    cursor: pointer;
-    font-size: large;
-    font-weight: 600;
-    padding: 16px;
-    width: 100%;
-    margin-top: 16px;
-}
+/*.button {*/
+/*    border-radius: 16px;*/
+/*    border: solid 2px #282A36;*/
+/*    color: #d4d4d4;*/
+/*    cursor: pointer;*/
+/*    font-size: large;*/
+/*    font-weight: 600;*/
+/*    padding: 16px;*/
+/*    width: 100%;*/
+/*    margin-top: 16px;*/
+/*}*/
 
-input {
-    margin-top: 16px;
-    width: 98%;
-    border-radius: 8px;
-    padding: 8px;
-}
+/*input {*/
+/*    margin-top: 16px;*/
+/*    width: 98%;*/
+/*    border-radius: 8px;*/
+/*    padding: 8px;*/
+/*}*/
