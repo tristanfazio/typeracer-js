@@ -1,3 +1,5 @@
+@import url("../../utils/global.css");
+
 .postGameContainer {
     grid-column-start: 2;
     grid-column-end: 3;
@@ -7,6 +9,7 @@
     height: 100%;
     width: 100%;
     max-width: 1200px;
+    margin: auto;
 
     display: flex;
     flex-direction: column;
@@ -52,9 +55,10 @@
     grid-area: quote;
     display: flex;
     flex-direction: column;
-    border: 3px solid #50546d;
-    border-radius: 5px;
-    margin: 32px;
+    border: 3px solid var(--secondary-purple);
+    border-radius: 8px;
+    margin-top: 40px;
+    max-width: 800px;
 }
 
 .postGameQuote {
@@ -64,24 +68,34 @@
     justify-content: flex-start;
     align-items: center;
 
-    color: whitesmoke;
-    font-size: medium;
-    font-weight: bold;
+    color: var(--font-body-grey);
     margin: 8px;
     padding: 8px;
     height: fit-content;
     width: fit-content;
     box-sizing: border-box;
+
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 29px;
+    letter-spacing: 0em;
+    text-align: left;
 }
 
 .author {
-    font-size: medium;
-    font-weight: normal;
-    font-style: italic;
-    float: left;
-    color: whitesmoke;
+    color: var(--font-body-grey);
     margin: 8px;
-    font-family: 'JetBrains Mono', monospace;
+    padding: 8px;
+    font-family: var(--font-header);
+    font-size: 14px;
+    font-style: italic;
+    font-weight: 600;
+    line-height: 29px;
+    letter-spacing: 0em;
+    justify-self: center;
+    align-self: center;
 }
 
 /*.playAgainButton {*/

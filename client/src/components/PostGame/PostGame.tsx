@@ -41,7 +41,7 @@ const PostGame = () => {
                 wpm={wpm}
                 errors={errors}
             />
-            {/*<PostGameQuote />*/}
+            <PostGameQuote />
             {/*<PlayAgainButton />*/}
         </div>
     );
