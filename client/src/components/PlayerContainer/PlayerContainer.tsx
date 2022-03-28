@@ -21,8 +21,8 @@ const PlayerContainer = (props: { gameState: GameState }) => {
                 duration={gameState.initialTime}
                 colors='#9C9BF4'
                 size={40}
-                strokeWidth={3}
-                trailStrokeWidth={3}
+                strokeWidth={4}
+                trailStrokeWidth={4}
                 onComplete={() => {
                     dispatch(setStatusFinished());
                 }}
