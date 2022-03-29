@@ -9,12 +9,12 @@
     height: 100%;
     width: 100%;
     max-width: 1200px;
-    margin: auto;
+    margin: 48px auto auto;
 
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
 }
 
 .titleContainer {
