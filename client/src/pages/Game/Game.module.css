@@ -3,7 +3,7 @@
 .gamePage {
     display: inline-grid;
     grid-template-columns: 0.5fr 2fr 0.5fr;
-    grid-template-rows: clamp(0fr, 1fr, 1fr) 1fr clamp(0fr, 1fr, 1fr);
+    grid-template-rows: 0.5fr 2fr 0.5fr;
     grid-template-areas:
         '. . .'
         '. quote-container .'
@@ -25,7 +25,8 @@
     justify-content: center;
     justify-self: center;
     margin: 24px 8px 8px 8px;
-    max-width: 1200px;
+    max-width: 1000px;
+    height: 100%;
 }
 
 .timerLabel {

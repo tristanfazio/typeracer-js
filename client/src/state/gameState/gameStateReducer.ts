@@ -1,12 +1,13 @@
-import {GameAction, UpdateGameStateAction, UpdateGameTimeAction} from './actionCreators';
+import { GameAction, InitGameAction, UpdateGameStateAction } from './actionCreators';
 import {
     INIT_GAME,
+    RESET_GAME,
     SET_STATUS_COUNTDOWN,
     SET_STATUS_FINISHED,
     SET_STATUS_PLAYING,
     SET_STATUS_POSTGAME,
     UPDATE_GAME_STATE,
-    UPDATE_GAME_TIME,
+    INCREMENT_GAME_TIME,
 } from './actions';
 
 const testString =
@@ -56,6 +57,7 @@ export interface GameState {
     status: GameStatus;
     initialTime: number;
     playerList: Player[];
+    myProgress: number;
     quoteArray: CharElement[][];
     author: string;
     currentWordIndex: number;
@@ -63,16 +65,17 @@ export interface GameState {
     completedWordCount: number;
     completedLetterCount: number;
     errors: number;
-    gameTime: number,
+    gameTime: number;
 }
 
 export const initialState: GameState = {
     gameId: 'test-game-id-123',
-    status: GameStatus.COUNTDOWN,
+    status: GameStatus.LOADING,
     initialTime: 60,
-    playerList: [{playerId: '1', playerName: 'Player 1', progress: 0}],
-    quoteArray: parseInitialQuoteToWords(testString),
-    author: 'Naomi Nagata',
+    playerList: [{ playerId: '1', playerName: 'Player 1', progress: 0 }],
+    myProgress: 0,
+    quoteArray: [],
+    author: '',
     currentWordIndex: 0,
     currentLetterIndex: 0,
     completedWordCount: 0,
@@ -81,44 +84,40 @@ export const initialState: GameState = {
     gameTime: 0,
 };
 
-const gameStateReducer = (
-    state = initialState,
-    action: GameAction,
-): GameState => {
+const gameStateReducer = (state = initialState, action: GameAction): GameState => {
     switch (action.type) {
         case UPDATE_GAME_STATE: {
             const updateAction = action as UpdateGameStateAction;
-            return {...updateAction.gameState};
+            return { ...updateAction.gameState };
         }
-        case UPDATE_GAME_TIME: {
-            const updateAction = action as UpdateGameTimeAction;
-            console.log(updateAction.time)
-            return {...state, gameTime: updateAction.time}
+        case INCREMENT_GAME_TIME: {
+            const gameTime = state.gameTime + 1;
+            console.log(gameTime);
+            return { ...state, gameTime };
         }
         case INIT_GAME: {
-            return {...initialState}
+            const initAction = action as InitGameAction;
+            return {
+                ...state,
+                quoteArray: initAction.quoteArray,
+                author: initAction.author,
+                status: GameStatus.COUNTDOWN,
+            };
+        }
+        case RESET_GAME: {
+            return { ...initialState };
         }
         case SET_STATUS_COUNTDOWN:
-            return {...state, status: GameStatus.COUNTDOWN};
+            return { ...state, status: GameStatus.COUNTDOWN };
         case SET_STATUS_FINISHED:
-            return {...state, status: GameStatus.FINISHED};
+            return { ...state, status: GameStatus.FINISHED };
         case SET_STATUS_PLAYING:
-            return {...state, status: GameStatus.PLAYING};
+            return { ...state, status: GameStatus.PLAYING };
         case SET_STATUS_POSTGAME:
-            return {...state, status: GameStatus.POSTGAME};
+            return { ...state, status: GameStatus.POSTGAME };
         default:
             return state;
     }
 };
 
 export default gameStateReducer;
-
-function parseInitialQuoteToWords(quote: string): CharElement[][] {
-    return quote.split(/([^\s]+\s?)/g)
-        .filter((word) => word)
-        .map((word) => {
-            return word.split('').map((charElement, index) => {
-                return new CharElement(charElement, index);
-            });
-        });
-}

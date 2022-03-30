@@ -1,20 +1,26 @@
 import {
+    INIT_GAME,
+    RESET_GAME,
     SET_STATUS_COUNTDOWN,
     SET_STATUS_FINISHED,
     SET_STATUS_PLAYING,
     SET_STATUS_POSTGAME,
     UPDATE_GAME_STATE,
-    UPDATE_GAME_TIME,
-    INIT_GAME,
+    INCREMENT_GAME_TIME,
 } from './actions';
-import { GameState } from './gameStateReducer';
+import { CharElement, GameState } from './gameStateReducer';
+import { getRandomQuote, parseInitialQuoteToWords } from '../../utils/quotes';
 
 export type GameAction =
     | UpdateGameStateAction
     | SetStatusAction
-    | UpdateGameTimeAction
-    | InitGameAction;
+    | IncrementGameTimeAction
+    | InitGameAction
+    | ResetGameAction;
 
+export interface ResetGameAction {
+    type: string;
+}
 export interface UpdateGameStateAction {
     type: string;
     gameState: GameState;
@@ -24,66 +30,65 @@ export interface SetStatusAction {
     type: string;
 }
 
-export interface UpdateGameTimeAction {
+export interface IncrementGameTimeAction {
     type: string;
-    time: number;
 }
 
 export interface InitGameAction {
     type: string;
+    quoteArray: CharElement[][];
+    author: string;
 }
 
 export function updateGameState(gameState: GameState): UpdateGameStateAction {
-    const action: UpdateGameStateAction = {
+    return {
         type: UPDATE_GAME_STATE,
         gameState,
     };
-    return action;
 }
 
-export function updateGameTime(time: number): UpdateGameTimeAction {
-    const action: UpdateGameTimeAction = {
-        type: UPDATE_GAME_TIME,
-        time,
+export function incrementGameTime(): IncrementGameTimeAction {
+    return {
+        type: INCREMENT_GAME_TIME,
     };
-    return action;
 }
 
 export function initGame(): InitGameAction {
-    const action: InitGameAction = {
+    const quote = getRandomQuote();
+    const quoteArray = parseInitialQuoteToWords(quote.content);
+    return {
         type: INIT_GAME,
+        quoteArray,
+        author: quote.author,
     };
-    return action;
+}
+
+export function resetGame(): ResetGameAction {
+    return {
+        type: RESET_GAME,
+    };
 }
 
 export function setStatusFinished(): SetStatusAction {
-    const action: SetStatusAction = {
+    return {
         type: SET_STATUS_FINISHED,
     };
-    console.log('FINISHED');
-    return action;
 }
 
 export function setStatusCountdown(): SetStatusAction {
-    const action: SetStatusAction = {
+    return {
         type: SET_STATUS_COUNTDOWN,
     };
-    console.log('COUNTDOWN');
-    return action;
 }
 
 export function setStatusPlaying(): SetStatusAction {
-    const action: SetStatusAction = {
+    return {
         type: SET_STATUS_PLAYING,
     };
-    console.log('PLAYING');
-    return action;
 }
 
 export function setStatusPostgame(): SetStatusAction {
-    const action: SetStatusAction = {
+    return {
         type: SET_STATUS_POSTGAME,
     };
-    console.log('POSTGAME');
-    return action;
 }

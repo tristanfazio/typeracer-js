@@ -1,11 +1,11 @@
-import {GameState, GameStatus} from '../../state/gameState/gameStateReducer';
+import { GameState, GameStatus } from '../../state/gameState/gameStateReducer';
 import styles from './PlayerContainer.module.css';
-import {CountdownCircleTimer} from 'react-countdown-circle-timer';
-import {setStatusFinished, updateGameTime} from '../../state/gameState/actionCreators';
+import { CountdownCircleTimer } from 'react-countdown-circle-timer';
+import { incrementGameTime, setStatusFinished } from '../../state/gameState/actionCreators';
 import React from 'react';
 import ProgressBar from '../ProgressBar';
-import {AppDispatch} from '../../state/store';
-import {useDispatch} from 'react-redux';
+import { AppDispatch } from '../../state/store';
+import { useDispatch } from 'react-redux';
 
 const PlayerContainer = (props: { gameState: GameState }) => {
     const dispatch: AppDispatch = useDispatch();
@@ -15,7 +15,7 @@ const PlayerContainer = (props: { gameState: GameState }) => {
 
     return (
         <div className={styles.playerContainer}>
-            <ProgressBar progress={gameState.playerList[0].progress}/>
+            <ProgressBar progress={gameState.myProgress} />
             <CountdownCircleTimer
                 isPlaying={gameStatus === GameStatus.PLAYING}
                 duration={gameState.initialTime}
@@ -26,17 +26,13 @@ const PlayerContainer = (props: { gameState: GameState }) => {
                 onComplete={() => {
                     dispatch(setStatusFinished());
                 }}
-                onUpdate={(remainingTime: number) => {
-                    dispatch(updateGameTime(remainingTime));
+                onUpdate={() => {
+                    dispatch(incrementGameTime());
                 }}
             >
-                {({remainingTime}) => (
-                    <div className={styles.timerLabel}>
-                        {remainingTime}
-                    </div>
-                )}
+                {({ remainingTime }) => <div className={styles.timerLabel}>{remainingTime}</div>}
             </CountdownCircleTimer>
-            <Dots/>
+            <Dots />
         </div>
     );
 };
@@ -44,10 +40,10 @@ const PlayerContainer = (props: { gameState: GameState }) => {
 const Dots = () => {
     return (
         <div className={styles.dots}>
-            <span className={`${styles.dot} ${styles.red}`}/>
-            <span className={`${styles.dot} ${styles.yellow}`}/>
-            <span className={`${styles.dot} ${styles.green}`}/>
+            <span className={`${styles.dot} ${styles.red}`} />
+            <span className={`${styles.dot} ${styles.yellow}`} />
+            <span className={`${styles.dot} ${styles.green}`} />
         </div>
-    )
-}
+    );
+};
 export default PlayerContainer;

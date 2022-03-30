@@ -7,7 +7,7 @@ import CreateGame from './pages/CreateGame/CreateGame';
 import JoinGame from './pages/JoinGame/JoinGame';
 import Game from './pages/Game/Game';
 import Header from './components/Header/Header';
-import { Player } from './types';
+import { Player } from './utils/types';
 import socket from './sockets/socketConfig';
 import { Provider } from 'react-redux';
 import { store } from './state/store';

@@ -1,5 +1,5 @@
 import socket from '../sockets/socketConfig';
-import { GameListEntry } from '../types';
+import { GameListEntry } from '../utils/types';
 import { updateLobby } from '../state/lobbyList/actionCreators';
 import { store } from '../state/store';
 

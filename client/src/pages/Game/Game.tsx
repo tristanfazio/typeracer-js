@@ -1,25 +1,16 @@
-import React, {useEffect} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import PlayerContainer from '../../components/PlayerContainer';
 import QuoteContainer from '../../components/QuoteContainer';
-import {
-    setStatusCountdown,
-    setStatusFinished,
-    setStatusPostgame,
-    updateGameState,
-} from '../../state/gameState/actionCreators';
-import {FillState, GameState, GameStatus,} from '../../state/gameState/gameStateReducer';
-import {AppDispatch, RootState} from '../../state/store';
+import { initGame, setStatusFinished, setStatusPostgame, updateGameState } from '../../state/gameState/actionCreators';
+import { FillState, GameState, GameStatus } from '../../state/gameState/gameStateReducer';
+import { AppDispatch, RootState } from '../../state/store';
 import styles from './Game.module.css';
 import PostGame from '../../components/PostGame';
 
 const Game = () => {
-    const gameState: GameState = useSelector(
-        (state: RootState) => state.gameState,
-    );
-    const gameStatus = useSelector(
-        (state: RootState) => state.gameState.status,
-    );
+    const gameState: GameState = useSelector((state: RootState) => state.gameState);
+    const gameStatus = useSelector((state: RootState) => state.gameState.status);
     const dispatch: AppDispatch = useDispatch();
 
     // Handle Status Transitions
@@ -27,7 +18,7 @@ const Game = () => {
         // fake loading
         if (gameStatus === GameStatus.LOADING) {
             setTimeout(() => {
-                dispatch(setStatusCountdown());
+                dispatch(initGame());
             }, 1000);
         }
 
@@ -39,14 +30,15 @@ const Game = () => {
     }, [dispatch, gameStatus]);
 
     useEffect(() => {
-        window.addEventListener('keydown', onKeyDown);
+        window.addEventListener('keydown', onKeyPress);
         // Remove event listeners on cleanup
         return () => {
-            window.removeEventListener('keydown', onKeyDown);
+            window.removeEventListener('keydown', onKeyPress);
         };
     }, [gameStatus]);
 
-    const onKeyDown = (e: KeyboardEvent): void => {
+    const onKeyPress = (e: KeyboardEvent): void => {
+        if (e.repeat) return;
         if (e.location !== KeyboardEvent.DOM_KEY_LOCATION_STANDARD) return;
         if (gameStatus !== GameStatus.PLAYING) return;
 
@@ -59,9 +51,7 @@ const Game = () => {
         if (e.key === 'Backspace') {
             if (currentWordIndex === 0 && currentLetterIndex === 0) return;
             // mark current letter as default
-            gameState.quoteArray[currentWordIndex][
-                currentLetterIndex
-                ].fillState = FillState.DEFAULT;
+            gameState.quoteArray[currentWordIndex][currentLetterIndex].fillState = FillState.DEFAULT;
 
             let previousLetterIndex = currentLetterIndex;
             let previousWordIndex = currentWordIndex;
@@ -80,13 +70,11 @@ const Game = () => {
             // update state object
             gameState.currentLetterIndex = previousLetterIndex;
             gameState.currentWordIndex = previousWordIndex;
-            gameState.quoteArray[previousWordIndex][
-                previousLetterIndex
-                ].fillState = FillState.CURSOR;
+            gameState.quoteArray[previousWordIndex][previousLetterIndex].fillState = FillState.CURSOR;
             gameState.completedLetterCount--;
 
             // send state and return out before other checks
-            dispatch(updateGameState({...gameState}));
+            dispatch(updateGameState({ ...gameState }));
             return;
         }
 
@@ -94,15 +82,11 @@ const Game = () => {
         if (currentLetter.character === e.key.toString()) {
             // correct
             // mark letter correct
-            gameState.quoteArray[currentWordIndex][
-                currentLetterIndex
-                ].fillState = FillState.CORRECT;
+            gameState.quoteArray[currentWordIndex][currentLetterIndex].fillState = FillState.CORRECT;
         } else {
             // incorrect keypress
             // mark letter incorrect
-            gameState.quoteArray[currentWordIndex][
-                currentLetterIndex
-                ].fillState = FillState.ERROR;
+            gameState.quoteArray[currentWordIndex][currentLetterIndex].fillState = FillState.ERROR;
             gameState.errors++;
         }
 
@@ -118,15 +102,11 @@ const Game = () => {
             gameState.currentWordIndex++;
             // update player progress
             gameState.completedWordCount++;
-            gameState.playerList[0].progress = Math.trunc(
-                (gameState.completedWordCount / gameState.quoteArray.length) *
-                100,
-            );
+            gameState.myProgress = Math.trunc((gameState.completedWordCount / gameState.quoteArray.length) * 100);
         }
         gameState.completedLetterCount++;
 
-
-        dispatch(updateGameState({...gameState}));
+        dispatch(updateGameState({ ...gameState }));
         if (gameState.completedWordCount === quoteArray.length) {
             dispatch(setStatusFinished());
         }
@@ -136,29 +116,22 @@ const Game = () => {
         return (
             <>
                 <div className={styles.gameContainer}>
-                    <PlayerContainer key='player-container' gameState={gameState}/>
-                    <QuoteContainer
-                        key='quote-container'
-                        gameState={gameState}
-                    />
+                    <PlayerContainer key='player-container' gameState={gameState} />
+                    <QuoteContainer key='quote-container' gameState={gameState} />
                 </div>
             </>
         );
     }
 
     const isLoading = gameStatus === GameStatus.LOADING;
-    const isGameViewable = [
-        GameStatus.COUNTDOWN,
-        GameStatus.PLAYING,
-        GameStatus.FINISHED,
-    ].includes(gameStatus);
+    const isGameViewable = [GameStatus.COUNTDOWN, GameStatus.PLAYING, GameStatus.FINISHED].includes(gameStatus);
     const isPostGame = gameStatus === GameStatus.POSTGAME;
 
     return (
         <div className={styles.gamePage}>
             {isLoading && <p className={styles.loadingText}>Loading...</p>}
             {isGameViewable && renderGameComponents()}
-            {isPostGame && <PostGame/>}
+            {isPostGame && <PostGame />}
         </div>
     );
 };

@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import styles from './GameMenu.module.css';
 import { useHistory } from 'react-router-dom';
-import { GameListEntry } from '../../types';
+import { GameListEntry } from '../../utils/types';
 import socket from '../../sockets/socketConfig';
 import { registerUpdateLobbyListener } from '../../sockets/lobbyListSockets';
 import { RootState } from '../../state/store';

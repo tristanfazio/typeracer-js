@@ -1,4 +1,4 @@
-import { GameListEntry } from "../../types";
+import { GameListEntry } from "../../utils/types";
 import { UPDATE_LOBBY_LIST } from "./actions"
 
 export type LobbyAction =

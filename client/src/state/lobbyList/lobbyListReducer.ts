@@ -1,5 +1,5 @@
 import { UPDATE_LOBBY_LIST } from  './actions';
-import { GameListEntry } from '../../types';
+import { GameListEntry } from '../../utils/types';
 import { LobbyAction } from './actionCreators';
 
 interface LobbyState {

@@ -10,19 +10,21 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: flex-start;
-    align-items: center;
+    align-content: flex-start;
 
     color: var(--font-body-grey);
     font-size: large;
     font-weight: bold;
-    padding-left: 2rem;
+    padding-left: 1.5rem;
     padding-top: 2rem;
     padding-bottom: 2rem;
 
-    height: 100%;
+    height: fit-content;
+    min-height: 400px;
     width: 100%;
     box-sizing: border-box;
     font-family: var(--font-header);
+    line-height: 2.5;
 }
 
 .finish {

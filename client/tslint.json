@@ -3,7 +3,6 @@
     "extends": ["tslint:recommended", "tslint-config-prettier"],
     "rules": {
         "eofline": false,
-        "quotemark": [true, "single"],
         "trailing-comma": false,
         "member-access": false,
         "indent": false,
