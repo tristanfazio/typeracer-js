@@ -1,5 +1,5 @@
 import Quote from './../Quote/';
-import {GameState, GameStatus} from '../../state/gameState/gameStateReducer';
+import { GameState, GameStatus } from '../../state/gameState/gameStateReducer';
 import Countdown from '../Countdown';
 import styles from './QuoteContainer.module.css';
 
@@ -9,15 +9,13 @@ const QuoteContainer = (props: { gameState: GameState }) => {
     const quoteArray = gameState.quoteArray;
     const status = gameState.status;
 
-    const finishedQuote =
-        gameState.completedWordCount === gameState.quoteArray.length;
+    const finishedQuote = gameState.completedWordCount === gameState.quoteArray.length;
+
     return (
         <div className={styles.quoteContainer}>
-            <Quote quoteArray={quoteArray} />
+            <Quote quoteArray={quoteArray} visible={gameState.status === GameStatus.PLAYING} />
             {status === GameStatus.COUNTDOWN && <Countdown />}
-            {status === GameStatus.FINISHED && (
-                <Finish finishedQuote={finishedQuote} />
-            )}
+            {status === GameStatus.FINISHED && <Finish finishedQuote={finishedQuote} />}
         </div>
     );
 };

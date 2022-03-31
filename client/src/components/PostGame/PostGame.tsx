@@ -102,7 +102,7 @@ const PostGameQuote = () => {
         <>
             <div className={styles.postGameQuoteContainer}>
                 <div className={styles.postGameQuote}>
-                    <Quote quoteArray={quoteArray} />
+                    <Quote quoteArray={quoteArray} visible={true} />
                 </div>
                 <p className={styles.author}>{author}</p>
             </div>

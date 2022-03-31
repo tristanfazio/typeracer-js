@@ -25,6 +25,8 @@
     box-sizing: border-box;
     font-family: var(--font-header);
     line-height: 2.5;
+
+    animation: fadein 0.5s;
 }
 
 .finish {
@@ -45,4 +47,9 @@
     color: var(--font-body-grey);
 
     font-size: 36px;
+}
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
 }

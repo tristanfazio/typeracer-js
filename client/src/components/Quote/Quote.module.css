@@ -20,3 +20,16 @@
 .cursor {
     border-left: 1px solid white;
 }
+
+.visible {
+    animation: fadeIn 0.5s;
+}
+
+.invisible {
+    opacity: 0;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}

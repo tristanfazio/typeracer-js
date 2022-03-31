@@ -27,10 +27,17 @@
     margin: 24px 8px 8px 8px;
     max-width: 1000px;
     height: 100%;
+
+    animation: fadein 1s;
 }
 
 .timerLabel {
     color: var(--font-body-grey);
     font-weight: bolder;
     font-size: larger;
+}
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
 }
