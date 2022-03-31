@@ -11,6 +11,7 @@ import PostGame from '../../components/PostGame';
 const Game = () => {
     const gameState: GameState = useSelector((state: RootState) => state.gameState);
     const gameStatus = useSelector((state: RootState) => state.gameState.status);
+    const gameTime = useSelector((state: RootState) => state.gameState.gameTime);
     const dispatch: AppDispatch = useDispatch();
 
     // Handle Status Transitions
@@ -35,7 +36,7 @@ const Game = () => {
         return () => {
             window.removeEventListener('keydown', onKeyPress);
         };
-    }, [gameStatus]);
+    }, [gameStatus, gameTime]);
 
     const onKeyPress = (e: KeyboardEvent): void => {
         if (e.repeat) return;
@@ -74,7 +75,7 @@ const Game = () => {
             gameState.completedLetterCount--;
 
             // send state and return out before other checks
-            dispatch(updateGameState({ ...gameState }));
+            dispatch(updateGameState({ ...gameState, gameTime }));
             return;
         }
 
@@ -106,7 +107,7 @@ const Game = () => {
         }
         gameState.completedLetterCount++;
 
-        dispatch(updateGameState({ ...gameState }));
+        dispatch(updateGameState({ ...gameState, gameTime }));
         if (gameState.completedWordCount === quoteArray.length) {
             dispatch(setStatusFinished());
         }
